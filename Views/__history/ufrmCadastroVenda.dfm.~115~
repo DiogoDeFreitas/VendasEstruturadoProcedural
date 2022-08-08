@@ -1,0 +1,1186 @@
+inherited frmCadastroVenda: TfrmCadastroVenda
+  Caption = 'Vendas'
+  ClientHeight = 433
+  ClientWidth = 962
+  ExplicitWidth = 968
+  ExplicitHeight = 461
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnlCabecalho: TPanel
+    Width = 962
+    ExplicitWidth = 962
+    inherited btnSair: TBitBtn
+      Left = 886
+      Top = 1
+      Height = 39
+      Align = alRight
+      ExplicitLeft = 886
+      ExplicitTop = 1
+      ExplicitHeight = 39
+    end
+    object btnImprimir: TBitBtn
+      Left = 368
+      Top = 0
+      Width = 75
+      Height = 41
+      Caption = 'Imprimir'
+      TabOrder = 5
+      OnClick = btnImprimirClick
+    end
+  end
+  object Panel1: TPanel [1]
+    Left = 0
+    Top = 41
+    Width = 962
+    Height = 66
+    Align = alTop
+    TabOrder = 1
+    object Label1: TLabel
+      Left = 8
+      Top = 16
+      Width = 75
+      Height = 13
+      Caption = 'ID_VENDA_VEN'
+    end
+    object Label2: TLabel
+      Left = 92
+      Top = 16
+      Width = 80
+      Height = 13
+      Caption = 'ID_CLIENTE_CLI'
+    end
+    object Label3: TLabel
+      Left = 288
+      Top = 16
+      Width = 52
+      Height = 13
+      Caption = 'DATA_VEN'
+    end
+    object Label5: TLabel
+      Left = 416
+      Top = 16
+      Width = 113
+      Height = 13
+      Caption = 'DATA_FATURADO_VEN'
+    end
+    object DBEdit1: TDBEdit
+      Left = 8
+      Top = 32
+      Width = 77
+      Height = 21
+      DataField = 'ID_VENDA_VEN'
+      DataSource = dsCadastro
+      Enabled = False
+      TabOrder = 4
+    end
+    object DBEdit3: TDBEdit
+      Left = 288
+      Top = 32
+      Width = 121
+      Height = 21
+      DataField = 'DATA_VEN'
+      DataSource = dsCadastro
+      TabOrder = 1
+    end
+    object DBEdit5: TDBEdit
+      Left = 416
+      Top = 32
+      Width = 121
+      Height = 21
+      DataField = 'DATA_FATURADO_VEN'
+      DataSource = dsCadastro
+      TabOrder = 2
+    end
+    object DBLookupComboBox1: TDBLookupComboBox
+      Left = 92
+      Top = 32
+      Width = 188
+      Height = 21
+      DataField = 'ID_CLIENTE_CLI'
+      DataSource = dsCadastro
+      KeyField = 'ID_CLIENTE_CLI'
+      ListField = 'NOMECLIENTE'
+      ListSource = dmLookUp.dsCliente
+      TabOrder = 0
+    end
+    object DBCheckBox1: TDBCheckBox
+      Left = 554
+      Top = 34
+      Width = 97
+      Height = 17
+      Caption = 'Faturado'
+      DataField = 'FATURADO_VEN'
+      DataSource = dsCadastro
+      TabOrder = 3
+      ValueChecked = 'S'
+      ValueUnchecked = 'N'
+    end
+  end
+  object Panel2: TPanel [2]
+    Left = 0
+    Top = 380
+    Width = 962
+    Height = 53
+    Align = alBottom
+    TabOrder = 2
+    object Label11: TLabel
+      Left = 8
+      Top = 8
+      Width = 42
+      Height = 13
+      Caption = 'SubTotal'
+    end
+    object Label13: TLabel
+      Left = 264
+      Top = 8
+      Width = 24
+      Height = 13
+      Caption = 'Total'
+    end
+    object Label12: TLabel
+      Left = 136
+      Top = 8
+      Width = 45
+      Height = 13
+      Caption = 'Desconto'
+    end
+    object edtTotSubTotal: TAdvMoneyEdit
+      Left = 8
+      Top = 24
+      Width = 121
+      Height = 21
+      EditType = etFloat
+      EmptyTextStyle = []
+      FlatLineColor = 11250603
+      FocusColor = clWindow
+      FocusFontColor = 3881787
+      Precision = 2
+      LabelFont.Charset = DEFAULT_CHARSET
+      LabelFont.Color = clWindowText
+      LabelFont.Height = -11
+      LabelFont.Name = 'Tahoma'
+      LabelFont.Style = []
+      Lookup.Font.Charset = DEFAULT_CHARSET
+      Lookup.Font.Color = clWindowText
+      Lookup.Font.Height = -11
+      Lookup.Font.Name = 'Arial'
+      Lookup.Font.Style = []
+      Lookup.Separator = ';'
+      Color = clWindow
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      Text = '0,00'
+      Visible = True
+      Version = '1.1.3.1'
+      CalculatorLook.ButtonWidth = 24
+      CalculatorLook.ButtonHeight = 24
+      CalculatorLook.ButtonColor = clSilver
+      CalculatorLook.Color = clWhite
+      CalculatorLook.Flat = False
+      CalculatorLook.Font.Charset = DEFAULT_CHARSET
+      CalculatorLook.Font.Color = clWindowText
+      CalculatorLook.Font.Height = -11
+      CalculatorLook.Font.Name = 'Tahoma'
+      CalculatorLook.Font.Style = []
+    end
+    object edtTotDesconto: TAdvMoneyEdit
+      Left = 136
+      Top = 24
+      Width = 121
+      Height = 21
+      EditType = etFloat
+      EmptyTextStyle = []
+      FlatLineColor = 11250603
+      FocusColor = clWindow
+      FocusFontColor = 3881787
+      Precision = 2
+      LabelFont.Charset = DEFAULT_CHARSET
+      LabelFont.Color = clWindowText
+      LabelFont.Height = -11
+      LabelFont.Name = 'Tahoma'
+      LabelFont.Style = []
+      Lookup.Font.Charset = DEFAULT_CHARSET
+      Lookup.Font.Color = clWindowText
+      Lookup.Font.Height = -11
+      Lookup.Font.Name = 'Arial'
+      Lookup.Font.Style = []
+      Lookup.Separator = ';'
+      Color = clWindow
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      Text = '0,00'
+      Visible = True
+      Version = '1.1.3.1'
+      CalculatorLook.ButtonWidth = 24
+      CalculatorLook.ButtonHeight = 24
+      CalculatorLook.ButtonColor = clSilver
+      CalculatorLook.Color = clWhite
+      CalculatorLook.Flat = False
+      CalculatorLook.Font.Charset = DEFAULT_CHARSET
+      CalculatorLook.Font.Color = clWindowText
+      CalculatorLook.Font.Height = -11
+      CalculatorLook.Font.Name = 'Tahoma'
+      CalculatorLook.Font.Style = []
+    end
+    object edtTotTotal: TAdvMoneyEdit
+      Left = 264
+      Top = 24
+      Width = 121
+      Height = 21
+      EditType = etFloat
+      EmptyTextStyle = []
+      FlatLineColor = 11250603
+      FocusColor = clWindow
+      FocusFontColor = 3881787
+      Precision = 2
+      LabelFont.Charset = DEFAULT_CHARSET
+      LabelFont.Color = clWindowText
+      LabelFont.Height = -11
+      LabelFont.Name = 'Tahoma'
+      LabelFont.Style = []
+      Lookup.Font.Charset = DEFAULT_CHARSET
+      Lookup.Font.Color = clWindowText
+      Lookup.Font.Height = -11
+      Lookup.Font.Name = 'Arial'
+      Lookup.Font.Style = []
+      Lookup.Separator = ';'
+      Color = clWindow
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      Text = '0,00'
+      Visible = True
+      Version = '1.1.3.1'
+      CalculatorLook.ButtonWidth = 24
+      CalculatorLook.ButtonHeight = 24
+      CalculatorLook.ButtonColor = clSilver
+      CalculatorLook.Color = clWhite
+      CalculatorLook.Flat = False
+      CalculatorLook.Font.Charset = DEFAULT_CHARSET
+      CalculatorLook.Font.Color = clWindowText
+      CalculatorLook.Font.Height = -11
+      CalculatorLook.Font.Name = 'Tahoma'
+      CalculatorLook.Font.Style = []
+    end
+  end
+  object Panel3: TPanel [3]
+    Left = 0
+    Top = 107
+    Width = 962
+    Height = 273
+    Align = alClient
+    TabOrder = 3
+    object Label4: TLabel
+      Left = 8
+      Top = 8
+      Width = 22
+      Height = 13
+      Caption = 'Item'
+    end
+    object Label6: TLabel
+      Left = 160
+      Top = 8
+      Width = 56
+      Height = 13
+      Caption = 'Quantidade'
+    end
+    object Label7: TLabel
+      Left = 288
+      Top = 8
+      Width = 64
+      Height = 13
+      Caption = 'Valor Unit'#225'rio'
+    end
+    object Label8: TLabel
+      Left = 416
+      Top = 8
+      Width = 45
+      Height = 13
+      Caption = 'Desconto'
+    end
+    object Label9: TLabel
+      Left = 544
+      Top = 8
+      Width = 42
+      Height = 13
+      Caption = 'SubTotal'
+    end
+    object Label10: TLabel
+      Left = 672
+      Top = 8
+      Width = 24
+      Height = 13
+      Caption = 'Total'
+    end
+    object DBLCBItem: TDBLookupComboBox
+      Left = 8
+      Top = 24
+      Width = 145
+      Height = 21
+      KeyField = 'ID_PRODUTO_PRO'
+      ListField = 'DESCRICAO_PRO'
+      ListSource = dmLookUp.dsProduto
+      TabOrder = 0
+      OnClick = DBLCBItemClick
+    end
+    object edtQtd: TAdvMoneyEdit
+      Left = 160
+      Top = 24
+      Width = 121
+      Height = 21
+      EditType = etFloat
+      EmptyTextStyle = []
+      FlatLineColor = 11250603
+      FocusColor = clWindow
+      FocusFontColor = 3881787
+      Precision = 2
+      LabelFont.Charset = DEFAULT_CHARSET
+      LabelFont.Color = clWindowText
+      LabelFont.Height = -11
+      LabelFont.Name = 'Tahoma'
+      LabelFont.Style = []
+      Lookup.Font.Charset = DEFAULT_CHARSET
+      Lookup.Font.Color = clWindowText
+      Lookup.Font.Height = -11
+      Lookup.Font.Name = 'Arial'
+      Lookup.Font.Style = []
+      Lookup.Separator = ';'
+      Color = clWindow
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      Text = '0,00'
+      Visible = True
+      OnChange = edtQtdChange
+      Version = '1.1.3.1'
+      CalculatorLook.ButtonWidth = 24
+      CalculatorLook.ButtonHeight = 24
+      CalculatorLook.ButtonColor = clSilver
+      CalculatorLook.Color = clWhite
+      CalculatorLook.Flat = False
+      CalculatorLook.Font.Charset = DEFAULT_CHARSET
+      CalculatorLook.Font.Color = clWindowText
+      CalculatorLook.Font.Height = -11
+      CalculatorLook.Font.Name = 'Tahoma'
+      CalculatorLook.Font.Style = []
+    end
+    object edtVlrUnt: TAdvMoneyEdit
+      Left = 288
+      Top = 24
+      Width = 121
+      Height = 21
+      EditType = etFloat
+      EmptyTextStyle = []
+      FlatLineColor = 11250603
+      FocusColor = clWindow
+      FocusFontColor = 3881787
+      Precision = 2
+      LabelFont.Charset = DEFAULT_CHARSET
+      LabelFont.Color = clWindowText
+      LabelFont.Height = -11
+      LabelFont.Name = 'Tahoma'
+      LabelFont.Style = []
+      Lookup.Font.Charset = DEFAULT_CHARSET
+      Lookup.Font.Color = clWindowText
+      Lookup.Font.Height = -11
+      Lookup.Font.Name = 'Arial'
+      Lookup.Font.Style = []
+      Lookup.Separator = ';'
+      Color = clWindow
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      Text = '0,00'
+      Visible = True
+      OnChange = edtVlrUntChange
+      Version = '1.1.3.1'
+      CalculatorLook.ButtonWidth = 24
+      CalculatorLook.ButtonHeight = 24
+      CalculatorLook.ButtonColor = clSilver
+      CalculatorLook.Color = clWhite
+      CalculatorLook.Flat = False
+      CalculatorLook.Font.Charset = DEFAULT_CHARSET
+      CalculatorLook.Font.Color = clWindowText
+      CalculatorLook.Font.Height = -11
+      CalculatorLook.Font.Name = 'Tahoma'
+      CalculatorLook.Font.Style = []
+    end
+    object edtDesconto: TAdvMoneyEdit
+      Left = 416
+      Top = 24
+      Width = 121
+      Height = 21
+      EditType = etFloat
+      EmptyTextStyle = []
+      FlatLineColor = 11250603
+      FocusColor = clWindow
+      FocusFontColor = 3881787
+      Precision = 2
+      LabelFont.Charset = DEFAULT_CHARSET
+      LabelFont.Color = clWindowText
+      LabelFont.Height = -11
+      LabelFont.Name = 'Tahoma'
+      LabelFont.Style = []
+      Lookup.Font.Charset = DEFAULT_CHARSET
+      Lookup.Font.Color = clWindowText
+      Lookup.Font.Height = -11
+      Lookup.Font.Name = 'Arial'
+      Lookup.Font.Style = []
+      Lookup.Separator = ';'
+      Color = clWindow
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      Text = '0,00'
+      Visible = True
+      OnChange = edtDescontoChange
+      Version = '1.1.3.1'
+      CalculatorLook.ButtonWidth = 24
+      CalculatorLook.ButtonHeight = 24
+      CalculatorLook.ButtonColor = clSilver
+      CalculatorLook.Color = clWhite
+      CalculatorLook.Flat = False
+      CalculatorLook.Font.Charset = DEFAULT_CHARSET
+      CalculatorLook.Font.Color = clWindowText
+      CalculatorLook.Font.Height = -11
+      CalculatorLook.Font.Name = 'Tahoma'
+      CalculatorLook.Font.Style = []
+    end
+    object edtSubTotal: TAdvMoneyEdit
+      Left = 544
+      Top = 24
+      Width = 121
+      Height = 21
+      EditType = etFloat
+      EmptyTextStyle = []
+      FlatLineColor = 11250603
+      FocusColor = clWindow
+      FocusFontColor = 3881787
+      Precision = 2
+      LabelFont.Charset = DEFAULT_CHARSET
+      LabelFont.Color = clWindowText
+      LabelFont.Height = -11
+      LabelFont.Name = 'Tahoma'
+      LabelFont.Style = []
+      Lookup.Font.Charset = DEFAULT_CHARSET
+      Lookup.Font.Color = clWindowText
+      Lookup.Font.Height = -11
+      Lookup.Font.Name = 'Arial'
+      Lookup.Font.Style = []
+      Lookup.Separator = ';'
+      Color = clWindow
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 4
+      Text = '0,00'
+      Visible = True
+      Version = '1.1.3.1'
+      CalculatorLook.ButtonWidth = 24
+      CalculatorLook.ButtonHeight = 24
+      CalculatorLook.ButtonColor = clSilver
+      CalculatorLook.Color = clWhite
+      CalculatorLook.Flat = False
+      CalculatorLook.Font.Charset = DEFAULT_CHARSET
+      CalculatorLook.Font.Color = clWindowText
+      CalculatorLook.Font.Height = -11
+      CalculatorLook.Font.Name = 'Tahoma'
+      CalculatorLook.Font.Style = []
+    end
+    object DBGrid1: TDBGrid
+      Left = 1
+      Top = 46
+      Width = 960
+      Height = 226
+      Align = alBottom
+      DataSource = dsItens
+      TabOrder = 6
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID_PRODUTO_PRO'
+          Title.Caption = 'C'#243'digo'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DescricaoProduto'
+          Title.Caption = 'Descricao'
+          Width = 299
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'QTD_VIT'
+          Title.Caption = 'Quantidade'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VALOR_UNITARIO_VIT'
+          Title.Caption = 'Valor Unitario'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DESCONTO_VIT'
+          Title.Caption = 'Desconto'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'SubTotal'
+          Title.Caption = 'Sub total'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Total'
+          Visible = True
+        end>
+    end
+    object edtTotal: TAdvMoneyEdit
+      Left = 672
+      Top = 24
+      Width = 121
+      Height = 21
+      EditType = etFloat
+      EmptyTextStyle = []
+      FlatLineColor = 11250603
+      FocusColor = clWindow
+      FocusFontColor = 3881787
+      Precision = 2
+      LabelFont.Charset = DEFAULT_CHARSET
+      LabelFont.Color = clWindowText
+      LabelFont.Height = -11
+      LabelFont.Name = 'Tahoma'
+      LabelFont.Style = []
+      Lookup.Font.Charset = DEFAULT_CHARSET
+      Lookup.Font.Color = clWindowText
+      Lookup.Font.Height = -11
+      Lookup.Font.Name = 'Arial'
+      Lookup.Font.Style = []
+      Lookup.Separator = ';'
+      Color = clWindow
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 5
+      Text = '0,00'
+      Visible = True
+      Version = '1.1.3.1'
+      CalculatorLook.ButtonWidth = 24
+      CalculatorLook.ButtonHeight = 24
+      CalculatorLook.ButtonColor = clSilver
+      CalculatorLook.Color = clWhite
+      CalculatorLook.Flat = False
+      CalculatorLook.Font.Charset = DEFAULT_CHARSET
+      CalculatorLook.Font.Color = clWindowText
+      CalculatorLook.Font.Height = -11
+      CalculatorLook.Font.Name = 'Tahoma'
+      CalculatorLook.Font.Style = []
+    end
+    object Button1: TButton
+      Left = 799
+      Top = 20
+      Width = 75
+      Height = 25
+      Caption = 'Gravar Item'
+      TabOrder = 7
+      OnClick = Button1Click
+    end
+    object Button2: TButton
+      Left = 879
+      Top = 20
+      Width = 75
+      Height = 25
+      Caption = 'Exluir'
+      TabOrder = 8
+      OnClick = Button2Click
+    end
+  end
+  inherited fdQryCadastro: TFDQuery
+    AfterOpen = fdQryCadastroAfterOpen
+    AfterInsert = fdQryCadastroAfterInsert
+    BeforePost = fdQryCadastroBeforePost
+    AfterScroll = fdQryCadastroAfterScroll
+    UpdateOptions.AssignedValues = [uvFetchGeneratorsPoint, uvGeneratorName]
+    UpdateOptions.FetchGeneratorsPoint = gpImmediate
+    UpdateOptions.GeneratorName = 'GEN_VENDA_ID'
+    UpdateOptions.AutoIncFields = 'ID_VENDA_VEN'
+    UpdateObject = nil
+    SQL.Strings = (
+      'SELECT * FROM VENDA')
+    Left = 864
+    Top = 248
+    object fdQryCadastroID_VENDA_VEN: TIntegerField
+      FieldName = 'ID_VENDA_VEN'
+      Origin = 'ID_VENDA_VEN'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdQryCadastroID_CLIENTE_CLI: TIntegerField
+      FieldName = 'ID_CLIENTE_CLI'
+      Origin = 'ID_CLIENTE_CLI'
+    end
+    object fdQryCadastroDATA_VEN: TDateField
+      FieldName = 'DATA_VEN'
+      Origin = 'DATA_VEN'
+    end
+    object fdQryCadastroFATURADO_VEN: TWideStringField
+      FieldName = 'FATURADO_VEN'
+      Origin = 'FATURADO_VEN'
+      Size = 1
+    end
+    object fdQryCadastroDATA_FATURADO_VEN: TDateField
+      FieldName = 'DATA_FATURADO_VEN'
+      Origin = 'DATA_FATURADO_VEN'
+    end
+  end
+  inherited fdUpdCadastro: TFDUpdateSQL
+    Left = 864
+    Top = 312
+  end
+  inherited fdTransaction: TFDTransaction
+    Left = 865
+    Top = 384
+  end
+  inherited dsCadastro: TDataSource
+    Left = 864
+    Top = 200
+  end
+  object fdQryItens: TFDQuery
+    AfterInsert = fdQryItensAfterInsert
+    AfterPost = fdQryItensAfterPost
+    AfterCancel = fdQryItensAfterCancel
+    AfterDelete = fdQryItensAfterDelete
+    OnCalcFields = fdQryItensCalcFields
+    Connection = dmConexao.fdConexao
+    Transaction = fdtransItem
+    UpdateOptions.AssignedValues = [uvFetchGeneratorsPoint, uvGeneratorName]
+    UpdateOptions.FetchGeneratorsPoint = gpImmediate
+    UpdateOptions.GeneratorName = 'GEN_VENDA_ITEM_ID'
+    UpdateOptions.AutoIncFields = 'ID_VENDA_ITEM_VIT'
+    SQL.Strings = (
+      'SELECT * FROM VENDA_ITEM'
+      'WHERE ID_VENDA_VEN= :ID_VENDA_VEN')
+    Left = 784
+    Top = 248
+    ParamData = <
+      item
+        Name = 'ID_VENDA_VEN'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object fdQryItensID_VENDA_ITEM_VIT: TFDAutoIncField
+      FieldName = 'ID_VENDA_ITEM_VIT'
+      Origin = 'ID_VENDA_ITEM_VIT'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      IdentityInsert = True
+    end
+    object fdQryItensID_PRODUTO_PRO: TIntegerField
+      FieldName = 'ID_PRODUTO_PRO'
+      Origin = 'ID_PRODUTO_PRO'
+    end
+    object fdQryItensQTD_VIT: TSingleField
+      FieldName = 'QTD_VIT'
+      Origin = 'QTD_VIT'
+    end
+    object fdQryItensVALOR_UNITARIO_VIT: TSingleField
+      FieldName = 'VALOR_UNITARIO_VIT'
+      Origin = 'VALOR_UNITARIO_VIT'
+    end
+    object fdQryItensDESCONTO_VIT: TSingleField
+      FieldName = 'DESCONTO_VIT'
+      Origin = 'DESCONTO_VIT'
+    end
+    object fdQryItensID_VENDA_VEN: TIntegerField
+      FieldName = 'ID_VENDA_VEN'
+      Origin = 'ID_VENDA_VEN'
+    end
+    object fdQryItensDescricaoProduto: TStringField
+      FieldKind = fkLookup
+      FieldName = 'DescricaoProduto'
+      LookupDataSet = dmLookUp.fdQryProduto
+      LookupKeyFields = 'ID_PRODUTO_PRO'
+      LookupResultField = 'DESCRICAO_PRO'
+      KeyFields = 'ID_PRODUTO_PRO'
+      Size = 80
+      Lookup = True
+    end
+    object fdQryItensSubTotal: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'SubTotal'
+      Calculated = True
+    end
+    object fdQryItensTotal: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'Total'
+      Calculated = True
+    end
+  end
+  object dsItens: TDataSource
+    DataSet = fdQryItens
+    Left = 784
+    Top = 200
+  end
+  object fdtransItem: TFDTransaction
+    Connection = dmConexao.fdConexao
+    Left = 784
+    Top = 384
+  end
+  object frVenda: TfrxReport
+    Version = '5.3.14'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 44715.810468784720000000
+    ReportOptions.LastChange = 44717.721482835640000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 368
+    Top = 203
+    Datasets = <
+      item
+        DataSet = frxDBDatasetItensVenda
+        DataSetName = 'frxDBDatasetItensVenda'
+      end
+      item
+        DataSet = frxDBDatasetVenda
+        DataSetName = 'frxDBDatasetVenda'
+      end>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
+        Height = 83.149660000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object Memo1: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 26.456710000000000000
+          Width = 109.606370000000000000
+          Height = 18.897650000000000000
+          Memo.UTF8W = (
+            '[frxDBDatasetVenda."ID_VENDA_VEN"]')
+        end
+        object Memo2: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 3.779530000000000000
+          Width = 113.385900000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'C'#243'digo da Venda')
+          ParentFont = False
+        end
+        object Memo3: TfrxMemoView
+          Left = 132.283550000000000000
+          Top = 26.456710000000000000
+          Width = 306.141930000000000000
+          Height = 18.897650000000000000
+          Memo.UTF8W = (
+            '[frxDBDatasetVenda."ID_CLIENTE_CLI"] - [Cliente]')
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+        object Memo4: TfrxMemoView
+          Left = 132.283550000000000000
+          Top = 3.779530000000000000
+          Width = 117.165430000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'C'#243'digo do Cliente')
+          ParentFont = False
+        end
+        object Line1: TfrxLineView
+          Left = -0.118120000000000000
+          Top = 45.913420000000000000
+          Width = 718.110236220000000000
+          Color = clBlack
+          Frame.Typ = [ftTop]
+        end
+        object Memo5: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 60.472480000000000000
+          Width = 49.133890000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'C'#243'digo')
+          ParentFont = False
+        end
+        object Memo6: TfrxMemoView
+          Left = 58.559060000000000000
+          Top = 60.440940000000000000
+          Width = 188.976500000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Descri'#231#227'o produto')
+          ParentFont = False
+        end
+        object Memo7: TfrxMemoView
+          Left = 253.228510000000000000
+          Top = 60.472480000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Quantidade')
+          ParentFont = False
+        end
+        object Memo8: TfrxMemoView
+          Left = 340.157700000000000000
+          Top = 60.472480000000000000
+          Width = 90.708720000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Valor Unitario')
+          ParentFont = False
+        end
+        object Memo9: TfrxMemoView
+          Left = 438.425480000000000000
+          Top = 60.472480000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Sub Total')
+          ParentFont = False
+        end
+        object Memo10: TfrxMemoView
+          Left = 525.354670000000000000
+          Top = 60.472480000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Desconto')
+          ParentFont = False
+        end
+        object Memo11: TfrxMemoView
+          Left = 616.063390000000000000
+          Top = 60.472480000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Total')
+          ParentFont = False
+        end
+        object Date: TfrxMemoView
+          Left = 631.181510000000000000
+          Top = 2.000000000000001000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Date]')
+          ParentFont = False
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 245.669450000000000000
+        Width = 718.110700000000000000
+        object SysMemo1: TfrxSysMemoView
+          Left = 604.724800000000000000
+          Top = 3.779527560000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<frxDBDatasetItensVenda."Total">,MasterData1)]')
+          ParentFont = False
+        end
+        object SysMemo2: TfrxSysMemoView
+          Left = 238.110390000000000000
+          Top = 3.779527560000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[COUNT(MasterData1)]')
+          ParentFont = False
+        end
+      end
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 162.519790000000000000
+        Width = 718.110700000000000000
+        DataSet = frxDBDatasetItensVenda
+        DataSetName = 'frxDBDatasetItensVenda'
+        RowCount = 0
+        object frxDBDatasetItensVendaID_PRODUTO_PRO: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 49.133890000000000000
+          Height = 18.897650000000000000
+          DataField = 'ID_PRODUTO_PRO'
+          DataSet = frxDBDatasetItensVenda
+          DataSetName = 'frxDBDatasetItensVenda'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[frxDBDatasetItensVenda."ID_PRODUTO_PRO"]')
+          ParentFont = False
+        end
+        object frxDBDatasetItensVendaDescricaoProduto: TfrxMemoView
+          Left = 58.692950000000000000
+          Width = 188.976500000000000000
+          Height = 18.897650000000000000
+          DataField = 'DescricaoProduto'
+          DataSet = frxDBDatasetItensVenda
+          DataSetName = 'frxDBDatasetItensVenda'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[frxDBDatasetItensVenda."DescricaoProduto"]')
+          ParentFont = False
+        end
+        object frxDBDatasetItensVendaQTD_VIT: TfrxMemoView
+          Left = 253.228510000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          DataField = 'QTD_VIT'
+          DataSet = frxDBDatasetItensVenda
+          DataSetName = 'frxDBDatasetItensVenda'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[frxDBDatasetItensVenda."QTD_VIT"]')
+          ParentFont = False
+        end
+        object frxDBDatasetItensVendaVALOR_UNITARIO_VIT: TfrxMemoView
+          Left = 340.157700000000000000
+          Width = 90.708720000000000000
+          Height = 18.897650000000000000
+          DataField = 'VALOR_UNITARIO_VIT'
+          DataSet = frxDBDatasetItensVenda
+          DataSetName = 'frxDBDatasetItensVenda'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[frxDBDatasetItensVenda."VALOR_UNITARIO_VIT"]')
+          ParentFont = False
+        end
+        object frxDBDatasetItensVendaSubTotal: TfrxMemoView
+          Left = 438.425480000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          DataField = 'SubTotal'
+          DataSet = frxDBDatasetItensVenda
+          DataSetName = 'frxDBDatasetItensVenda'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[frxDBDatasetItensVenda."SubTotal"]')
+          ParentFont = False
+        end
+        object frxDBDatasetItensVendaDESCONTO_VIT: TfrxMemoView
+          Left = 525.354670000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          DataField = 'DESCONTO_VIT'
+          DataSet = frxDBDatasetItensVenda
+          DataSetName = 'frxDBDatasetItensVenda'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[frxDBDatasetItensVenda."DESCONTO_VIT"]')
+          ParentFont = False
+        end
+        object frxDBDatasetItensVendaTotal: TfrxMemoView
+          Left = 616.063390000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          DataField = 'Total'
+          DataSet = frxDBDatasetItensVenda
+          DataSetName = 'frxDBDatasetItensVenda'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[frxDBDatasetItensVenda."Total"]')
+          ParentFont = False
+        end
+      end
+      object Line2: TfrxLineView
+        Top = 241.889920000000000000
+        Width = 718.110236220000000000
+        Color = clBlack
+        Frame.Typ = [ftTop]
+      end
+    end
+  end
+  object frxDBDatasetVenda: TfrxDBDataset
+    UserName = 'frxDBDatasetVenda'
+    CloseDataSource = False
+    DataSet = fdQryCadastro
+    BCDToCurrency = False
+    Left = 368
+    Top = 267
+  end
+  object frxDBDatasetItensVenda: TfrxDBDataset
+    UserName = 'frxDBDatasetItensVenda'
+    CloseDataSource = False
+    DataSet = fdQryItens
+    BCDToCurrency = False
+    Left = 368
+    Top = 323
+  end
+end

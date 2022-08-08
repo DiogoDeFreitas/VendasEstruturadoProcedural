@@ -1,0 +1,42 @@
+unit ufrmFiltroProdutos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ufrmFiltroPai, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.Client, Data.DB, FireDAC.Comp.DataSet, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Grids, Vcl.DBGrids;
+
+type
+  TfrmFiltroProdutos = class(TfrmFiltroPai)
+    fdQryFiltroID_PRODUTO_PRO: TIntegerField;
+    fdQryFiltroDESCRICAO_PRO: TWideStringField;
+    fdQryFiltroQTDE_PRO: TSingleField;
+    fdQryFiltroCUSTO_PRO: TSingleField;
+    fdQryFiltroV_UNITARIO_PRO: TSingleField;
+    fdQryFiltroUNIDADE_PRO: TWideStringField;
+    fdQryFiltroPESO_LIQUIDO_PRO: TSingleField;
+    fdQryFiltroPESO_BRUTO_PRO: TSingleField;
+    fdQryFiltroFABRICANTE_PRO: TWideStringField;
+    fdQryFiltroMARCA_MODELO_PRO: TWideStringField;
+    fdQryFiltroID_FORNECEDOR_FOR: TIntegerField;
+    DBGrid1: TDBGrid;
+    Label2: TLabel;
+    Edit1: TEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmFiltroProdutos: TfrmFiltroProdutos;
+
+implementation
+
+{$R *.dfm}
+
+end.

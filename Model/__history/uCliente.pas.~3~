@@ -1,0 +1,22 @@
+unit uCliente;
+
+interface
+
+type
+  TCliente = class
+    private
+
+    public
+      function GetNomeTabela: String;
+  end;
+
+implementation
+
+{ TCliente }
+
+function TCliente.GetNomeTabela: String;
+begin
+  Result := 'CLIENTE';
+end;
+
+end.

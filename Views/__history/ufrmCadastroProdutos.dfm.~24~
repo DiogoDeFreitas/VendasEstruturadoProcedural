@@ -1,0 +1,404 @@
+inherited frmCadastroProdutos: TfrmCadastroProdutos
+  Caption = 'Cadastro de Produtos'
+  ClientHeight = 228
+  ClientWidth = 760
+  ExplicitWidth = 766
+  ExplicitHeight = 256
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel [0]
+    Left = 8
+    Top = 88
+    Width = 59
+    Height = 13
+    Caption = 'DESCRICAO'
+  end
+  object Label3: TLabel [1]
+    Left = 312
+    Top = 90
+    Width = 27
+    Height = 13
+    Caption = 'QTDE'
+  end
+  object Label4: TLabel [2]
+    Left = 386
+    Top = 90
+    Width = 34
+    Height = 13
+    Caption = 'CUSTO'
+  end
+  object Label5: TLabel [3]
+    Left = 523
+    Top = 90
+    Width = 62
+    Height = 13
+    Caption = 'V_UNITARIO'
+  end
+  object Label6: TLabel [4]
+    Left = 8
+    Top = 136
+    Width = 45
+    Height = 13
+    Caption = 'UNIDADE'
+  end
+  object Label7: TLabel [5]
+    Left = 148
+    Top = 138
+    Width = 75
+    Height = 13
+    Caption = 'PESO_LIQUIDO'
+  end
+  object Label8: TLabel [6]
+    Left = 284
+    Top = 138
+    Width = 66
+    Height = 13
+    Caption = 'PESO_BRUTO'
+  end
+  object Label9: TLabel [7]
+    Left = 420
+    Top = 138
+    Width = 63
+    Height = 13
+    Caption = 'FABRICANTE'
+  end
+  object Label10: TLabel [8]
+    Left = 8
+    Top = 186
+    Width = 84
+    Height = 13
+    Caption = 'MARCA_MODELO'
+  end
+  object Label2: TLabel [9]
+    Left = 8
+    Top = 45
+    Width = 41
+    Height = 13
+    Caption = 'C'#211'DIGO'
+  end
+  object Label11: TLabel [10]
+    Left = 312
+    Top = 184
+    Width = 113
+    Height = 13
+    Caption = 'ID_FORNECEDOR_FOR'
+  end
+  inherited pnlCabecalho: TPanel
+    Width = 760
+    ExplicitWidth = 760
+    inherited btnSair: TBitBtn
+      Left = 685
+      ExplicitLeft = 685
+    end
+  end
+  object DBEdit1: TDBEdit [12]
+    Left = 8
+    Top = 106
+    Width = 300
+    Height = 21
+    DataField = 'DESCRICAO_PRO'
+    DataSource = dsCadastro
+    TabOrder = 1
+  end
+  object DBEdit7: TDBEdit [13]
+    Left = 8
+    Top = 154
+    Width = 134
+    Height = 21
+    DataField = 'UNIDADE_PRO'
+    DataSource = dsCadastro
+    TabOrder = 2
+  end
+  object DBEdit8: TDBEdit [14]
+    Left = 420
+    Top = 154
+    Width = 300
+    Height = 21
+    DataField = 'FABRICANTE_PRO'
+    DataSource = dsCadastro
+    TabOrder = 3
+  end
+  object DBEdit9: TDBEdit [15]
+    Left = 8
+    Top = 202
+    Width = 300
+    Height = 21
+    DataField = 'MARCA_MODELO_PRO'
+    DataSource = dsCadastro
+    TabOrder = 4
+  end
+  object DBMoneyEdit1: TDBAdvMoneyEdit [16]
+    Left = 312
+    Top = 106
+    Width = 70
+    Height = 21
+    EditType = etFloat
+    EmptyTextStyle = []
+    LabelFont.Charset = DEFAULT_CHARSET
+    LabelFont.Color = clWindowText
+    LabelFont.Height = -11
+    LabelFont.Name = 'Tahoma'
+    LabelFont.Style = []
+    Lookup.Font.Charset = DEFAULT_CHARSET
+    Lookup.Font.Color = clWindowText
+    Lookup.Font.Height = -11
+    Lookup.Font.Name = 'Arial'
+    Lookup.Font.Style = []
+    Lookup.Separator = ';'
+    Color = clWindow
+    TabOrder = 5
+    Text = '0'
+    Visible = True
+    Version = '1.1.3.1'
+    CalculatorLook.ButtonWidth = 24
+    CalculatorLook.ButtonHeight = 24
+    CalculatorLook.ButtonColor = clSilver
+    CalculatorLook.Color = clWhite
+    CalculatorLook.Flat = False
+    CalculatorLook.Font.Charset = DEFAULT_CHARSET
+    CalculatorLook.Font.Color = clWindowText
+    CalculatorLook.Font.Height = -11
+    CalculatorLook.Font.Name = 'Tahoma'
+    CalculatorLook.Font.Style = []
+    DataField = 'QTDE_PRO'
+    DataSource = dsCadastro
+  end
+  object DBMoneyEdit2: TDBAdvMoneyEdit [17]
+    Left = 386
+    Top = 106
+    Width = 128
+    Height = 21
+    EditType = etFloat
+    EmptyTextStyle = []
+    LabelFont.Charset = DEFAULT_CHARSET
+    LabelFont.Color = clWindowText
+    LabelFont.Height = -11
+    LabelFont.Name = 'Tahoma'
+    LabelFont.Style = []
+    Lookup.Font.Charset = DEFAULT_CHARSET
+    Lookup.Font.Color = clWindowText
+    Lookup.Font.Height = -11
+    Lookup.Font.Name = 'Arial'
+    Lookup.Font.Style = []
+    Lookup.Separator = ';'
+    Color = clWindow
+    TabOrder = 6
+    Text = '0'
+    Visible = True
+    Version = '1.1.3.1'
+    CalculatorLook.ButtonWidth = 24
+    CalculatorLook.ButtonHeight = 24
+    CalculatorLook.ButtonColor = clSilver
+    CalculatorLook.Color = clWhite
+    CalculatorLook.Flat = False
+    CalculatorLook.Font.Charset = DEFAULT_CHARSET
+    CalculatorLook.Font.Color = clWindowText
+    CalculatorLook.Font.Height = -11
+    CalculatorLook.Font.Name = 'Tahoma'
+    CalculatorLook.Font.Style = []
+    DataField = 'CUSTO_PRO'
+    DataSource = dsCadastro
+  end
+  object DBMoneyEdit3: TDBAdvMoneyEdit [18]
+    Left = 523
+    Top = 106
+    Width = 128
+    Height = 21
+    EditType = etFloat
+    EmptyTextStyle = []
+    LabelFont.Charset = DEFAULT_CHARSET
+    LabelFont.Color = clWindowText
+    LabelFont.Height = -11
+    LabelFont.Name = 'Tahoma'
+    LabelFont.Style = []
+    Lookup.Font.Charset = DEFAULT_CHARSET
+    Lookup.Font.Color = clWindowText
+    Lookup.Font.Height = -11
+    Lookup.Font.Name = 'Arial'
+    Lookup.Font.Style = []
+    Lookup.Separator = ';'
+    Color = clWindow
+    TabOrder = 7
+    Text = '0'
+    Visible = True
+    Version = '1.1.3.1'
+    CalculatorLook.ButtonWidth = 24
+    CalculatorLook.ButtonHeight = 24
+    CalculatorLook.ButtonColor = clSilver
+    CalculatorLook.Color = clWhite
+    CalculatorLook.Flat = False
+    CalculatorLook.Font.Charset = DEFAULT_CHARSET
+    CalculatorLook.Font.Color = clWindowText
+    CalculatorLook.Font.Height = -11
+    CalculatorLook.Font.Name = 'Tahoma'
+    CalculatorLook.Font.Style = []
+    DataField = 'V_UNITARIO_PRO'
+    DataSource = dsCadastro
+  end
+  object DBMoneyEdit4: TDBAdvMoneyEdit [19]
+    Left = 148
+    Top = 154
+    Width = 128
+    Height = 21
+    EditType = etFloat
+    EmptyTextStyle = []
+    LabelFont.Charset = DEFAULT_CHARSET
+    LabelFont.Color = clWindowText
+    LabelFont.Height = -11
+    LabelFont.Name = 'Tahoma'
+    LabelFont.Style = []
+    Lookup.Font.Charset = DEFAULT_CHARSET
+    Lookup.Font.Color = clWindowText
+    Lookup.Font.Height = -11
+    Lookup.Font.Name = 'Arial'
+    Lookup.Font.Style = []
+    Lookup.Separator = ';'
+    Color = clWindow
+    TabOrder = 8
+    Text = '0'
+    Visible = True
+    Version = '1.1.3.1'
+    CalculatorLook.ButtonWidth = 24
+    CalculatorLook.ButtonHeight = 24
+    CalculatorLook.ButtonColor = clSilver
+    CalculatorLook.Color = clWhite
+    CalculatorLook.Flat = False
+    CalculatorLook.Font.Charset = DEFAULT_CHARSET
+    CalculatorLook.Font.Color = clWindowText
+    CalculatorLook.Font.Height = -11
+    CalculatorLook.Font.Name = 'Tahoma'
+    CalculatorLook.Font.Style = []
+    DataField = 'PESO_LIQUIDO_PRO'
+    DataSource = dsCadastro
+  end
+  object DBMoneyEdit5: TDBAdvMoneyEdit [20]
+    Left = 284
+    Top = 154
+    Width = 128
+    Height = 21
+    EditType = etFloat
+    EmptyTextStyle = []
+    LabelFont.Charset = DEFAULT_CHARSET
+    LabelFont.Color = clWindowText
+    LabelFont.Height = -11
+    LabelFont.Name = 'Tahoma'
+    LabelFont.Style = []
+    Lookup.Font.Charset = DEFAULT_CHARSET
+    Lookup.Font.Color = clWindowText
+    Lookup.Font.Height = -11
+    Lookup.Font.Name = 'Arial'
+    Lookup.Font.Style = []
+    Lookup.Separator = ';'
+    Color = clWindow
+    TabOrder = 9
+    Text = '0'
+    Visible = True
+    Version = '1.1.3.1'
+    CalculatorLook.ButtonWidth = 24
+    CalculatorLook.ButtonHeight = 24
+    CalculatorLook.ButtonColor = clSilver
+    CalculatorLook.Color = clWhite
+    CalculatorLook.Flat = False
+    CalculatorLook.Font.Charset = DEFAULT_CHARSET
+    CalculatorLook.Font.Color = clWindowText
+    CalculatorLook.Font.Height = -11
+    CalculatorLook.Font.Name = 'Tahoma'
+    CalculatorLook.Font.Style = []
+    DataField = 'PESO_BRUTO_PRO'
+    DataSource = dsCadastro
+  end
+  object DBEdit2: TDBEdit [21]
+    Left = 8
+    Top = 58
+    Width = 134
+    Height = 21
+    DataField = 'ID_PRODUTO_PRO'
+    DataSource = dsCadastro
+    ReadOnly = True
+    TabOrder = 10
+  end
+  object DBLookupComboBox1: TDBLookupComboBox [22]
+    Left = 312
+    Top = 202
+    Width = 145
+    Height = 21
+    DataField = 'ID_FORNECEDOR_FOR'
+    DataSource = dsCadastro
+    KeyField = 'ID_FORNECEDOR_FOR'
+    ListField = 'RAZAO_SOCIAL_FOR'
+    ListSource = dmLookUp.dsFornecedor
+    TabOrder = 11
+  end
+  inherited fdQryCadastro: TFDQuery
+    UpdateOptions.AssignedValues = [uvFetchGeneratorsPoint, uvGeneratorName]
+    UpdateOptions.FetchGeneratorsPoint = gpImmediate
+    UpdateOptions.GeneratorName = 'GEN_PRODUTO_ID'
+    UpdateOptions.AutoIncFields = 'ID_PRODUTO_PRO'
+    SQL.Strings = (
+      'SELECT * FROM PRODUTO')
+    Left = 712
+    Top = 56
+    object fdQryCadastroID_PRODUTO_PRO: TFDAutoIncField
+      FieldName = 'ID_PRODUTO_PRO'
+      Origin = 'ID_PRODUTO_PRO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      IdentityInsert = True
+    end
+    object fdQryCadastroDESCRICAO_PRO: TWideStringField
+      FieldName = 'DESCRICAO_PRO'
+      Origin = 'DESCRICAO_PRO'
+      Size = 80
+    end
+    object fdQryCadastroQTDE_PRO: TSingleField
+      FieldName = 'QTDE_PRO'
+      Origin = 'QTDE_PRO'
+    end
+    object fdQryCadastroCUSTO_PRO: TSingleField
+      FieldName = 'CUSTO_PRO'
+      Origin = 'CUSTO_PRO'
+    end
+    object fdQryCadastroV_UNITARIO_PRO: TSingleField
+      FieldName = 'V_UNITARIO_PRO'
+      Origin = 'V_UNITARIO_PRO'
+    end
+    object fdQryCadastroUNIDADE_PRO: TWideStringField
+      FieldName = 'UNIDADE_PRO'
+      Origin = 'UNIDADE_PRO'
+      Size = 4
+    end
+    object fdQryCadastroPESO_LIQUIDO_PRO: TSingleField
+      FieldName = 'PESO_LIQUIDO_PRO'
+      Origin = 'PESO_LIQUIDO_PRO'
+    end
+    object fdQryCadastroPESO_BRUTO_PRO: TSingleField
+      FieldName = 'PESO_BRUTO_PRO'
+      Origin = 'PESO_BRUTO_PRO'
+    end
+    object fdQryCadastroFABRICANTE_PRO: TWideStringField
+      FieldName = 'FABRICANTE_PRO'
+      Origin = 'FABRICANTE_PRO'
+      Size = 60
+    end
+    object fdQryCadastroMARCA_MODELO_PRO: TWideStringField
+      FieldName = 'MARCA_MODELO_PRO'
+      Origin = 'MARCA_MODELO_PRO'
+      Size = 255
+    end
+    object fdQryCadastroID_FORNECEDOR_FOR: TIntegerField
+      FieldName = 'ID_FORNECEDOR_FOR'
+      Origin = 'ID_FORNECEDOR_FOR'
+    end
+  end
+  inherited fdUpdCadastro: TFDUpdateSQL
+    Left = 712
+    Top = 104
+  end
+  inherited fdTransaction: TFDTransaction
+    Left = 713
+    Top = 152
+  end
+  inherited dsCadastro: TDataSource
+    Left = 712
+    Top = 8
+  end
+end

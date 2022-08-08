@@ -1,0 +1,156 @@
+unit uClienteModel;
+
+interface
+
+type
+  TCliente = class
+    private
+    FIDCIDADECID: String;
+    FCOMPLEMENTOCLI: String;
+    FDTEXCLUIDO: String;
+    FNOMECLI: String;
+    FENDERECOCLI: String;
+    FIDESTADOEST: String;
+    FFANTASIACLI: String;
+    FRAZAOSOCIAL: String;
+    FBAIRROCLI: String;
+    FSITECLI: String;
+    FEMAILCLI: String;
+    FTIPOFJCLI: String;
+    FIMCLI: String;
+    FIDCLIENTE: Integer;
+    FCPFCNPJCLI: String;
+    FIECLI: String;
+    FNUMEROCLI: String;
+    procedure SetBAIRROCLI(const Value: String);
+    procedure SetCOMPLEMENTOCLI(const Value: String);
+    procedure SetCPFCNPJCLI(const Value: String);
+    procedure SetDTEXCLUIDO(const Value: String);
+    procedure SetEMAILCLI(const Value: String);
+    procedure SetENDERECOCLI(const Value: String);
+    procedure SetFANTASIACLI(const Value: String);
+    procedure SetIDCIDADECID(const Value: String);
+    procedure SetIDCLIENTE(const Value: Integer);
+    procedure SetIDESTADOEST(const Value: String);
+    procedure SetIECLI(const Value: String);
+    procedure SetIMCLI(const Value: String);
+    procedure SetNOMECLI(const Value: String);
+    procedure SetNUMEROCLI(const Value: String);
+    procedure SetRAZAOSOCIAL(const Value: String);
+    procedure SetSITECLI(const Value: String);
+    procedure SetTIPOFJCLI(const Value: String);
+
+    public
+      property IDCLIENTE: Integer read FIDCLIENTE write SetIDCLIENTE;
+      property RAZAOSOCIAL: String read FRAZAOSOCIAL write SetRAZAOSOCIAL;
+      property FANTASIACLI: String read FFANTASIACLI write SetFANTASIACLI;
+      property CPFCNPJCLI: String read FCPFCNPJCLI write SetCPFCNPJCLI;
+      property TIPOFJCLI: String read FTIPOFJCLI write SetTIPOFJCLI;
+      property NOMECLI: String read FNOMECLI write SetNOMECLI;
+      property EMAILCLI: String read FEMAILCLI write SetEMAILCLI;
+      property SITECLI: String read FSITECLI write SetSITECLI;
+      property ENDERECOCLI: String read FENDERECOCLI write SetENDERECOCLI;
+      property COMPLEMENTOCLI: String read FCOMPLEMENTOCLI write SetCOMPLEMENTOCLI;
+      property NUMEROCLI: String read FNUMEROCLI write SetNUMEROCLI;
+      property BAIRROCLI: String read FBAIRROCLI write SetBAIRROCLI;
+      property IECLI: String read FIECLI write SetIECLI;
+      property IMCLI: String read FIMCLI write SetIMCLI;
+      property DTEXCLUIDO: String read FDTEXCLUIDO write SetDTEXCLUIDO;
+      property IDCIDADECID: String read FIDCIDADECID write SetIDCIDADECID;
+      property IDESTADOEST: String read FIDESTADOEST write SetIDESTADOEST;
+
+  end;
+
+implementation
+
+{ TCliente }
+
+
+{ TCliente }
+
+procedure TCliente.SetBAIRROCLI(const Value: String);
+begin
+  FBAIRROCLI := Value;
+end;
+
+procedure TCliente.SetCOMPLEMENTOCLI(const Value: String);
+begin
+  FCOMPLEMENTOCLI := Value;
+end;
+
+procedure TCliente.SetCPFCNPJCLI(const Value: String);
+begin
+  FCPFCNPJCLI := Value;
+end;
+
+procedure TCliente.SetDTEXCLUIDO(const Value: String);
+begin
+  FDTEXCLUIDO := Value;
+end;
+
+procedure TCliente.SetEMAILCLI(const Value: String);
+begin
+  FEMAILCLI := Value;
+end;
+
+procedure TCliente.SetENDERECOCLI(const Value: String);
+begin
+  FENDERECOCLI := Value;
+end;
+
+procedure TCliente.SetFANTASIACLI(const Value: String);
+begin
+  FFANTASIACLI := Value;
+end;
+
+procedure TCliente.SetIDCIDADECID(const Value: String);
+begin
+  FIDCIDADECID := Value;
+end;
+
+procedure TCliente.SetIDCLIENTE(const Value: Integer);
+begin
+  FIDCLIENTE := Value;
+end;
+
+procedure TCliente.SetIDESTADOEST(const Value: String);
+begin
+  FIDESTADOEST := Value;
+end;
+
+procedure TCliente.SetIECLI(const Value: String);
+begin
+  FIECLI := Value;
+end;
+
+procedure TCliente.SetIMCLI(const Value: String);
+begin
+  FIMCLI := Value;
+end;
+
+procedure TCliente.SetNOMECLI(const Value: String);
+begin
+  FNOMECLI := Value;
+end;
+
+procedure TCliente.SetNUMEROCLI(const Value: String);
+begin
+  FNUMEROCLI := Value;
+end;
+
+procedure TCliente.SetRAZAOSOCIAL(const Value: String);
+begin
+  FRAZAOSOCIAL := Value;
+end;
+
+procedure TCliente.SetSITECLI(const Value: String);
+begin
+  FSITECLI := Value;
+end;
+
+procedure TCliente.SetTIPOFJCLI(const Value: String);
+begin
+  FTIPOFJCLI := Value;
+end;
+
+end.

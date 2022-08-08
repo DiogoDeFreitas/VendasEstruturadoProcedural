@@ -1,0 +1,50 @@
+unit uBiblioteca;
+
+interface
+  uses IniFiles, System.SysUtils, Vcl.Forms, FireDAC.Comp.Client,
+  System.Classes;
+
+  procedure SetValorIni(pLocal, pSessao, pSubSessao, pValor: string);
+
+  function GetValorIni(pLocal, pSessao, pSubSessao: string): string;
+
+  procedure AtualizaFDQuery(const pFDQuery: TFDQuery; pSQL: String);
+  procedure AbreTela(pClass: TComponentClass; pForm: TForm);
+
+implementation
+procedure SetValorIni(pLocal, pSessao, pSubSessao, pValor: string);
+var
+  Arquivo: TIniFile;
+begin
+  Arquivo := TIniFile.Create(pLocal);
+  Arquivo.WriteString(pSessao, pSubSessao, pValor);
+  arquivo.Free;
+end;
+
+function GetValorIni(pLocal, pSessao, pSubSessao: string): string;
+var
+  Arquivo: TIniFile;
+begin
+  Arquivo := TIniFile.Create(pLocal);
+  try
+    Result := Arquivo.ReadString(pSessao, pSubSessao, '');
+  finally
+    Arquivo.Free;
+  end;
+
+end;
+
+procedure AtualizaFDQuery(const pFDQuery: TFDQuery; pSQL: String);
+begin
+  pFDQuery.Close;
+  if Trim(pSQL) <> '' then
+  begin
+    pFDQuery.SQL.Clear;
+    pFDQuery.SQL.Text := pSQL;
+  end;
+
+  pFDQuery.Open();
+  pFDQuery.FetchAll;
+end;
+
+end.

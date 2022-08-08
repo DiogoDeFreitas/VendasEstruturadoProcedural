@@ -1,0 +1,49 @@
+object dmLookUp: TdmLookUp
+  OldCreateOrder = False
+  Height = 257
+  Width = 542
+  object fdQryEstados: TFDQuery
+    Connection = dmConexao.fdConexao
+    Transaction = fdTransaction
+    SQL.Strings = (
+      'SELECT * FROM ESTADO')
+    Left = 24
+    Top = 88
+  end
+  object dsEstados: TDataSource
+    DataSet = fdQryEstados
+    Left = 24
+    Top = 144
+  end
+  object fdTransaction: TFDTransaction
+    Connection = dmConexao.fdConexao
+    Left = 248
+    Top = 8
+  end
+  object fdQryCidades: TFDQuery
+    Connection = dmConexao.fdConexao
+    Transaction = fdTransaction
+    SQL.Strings = (
+      'SELECT *FROM CIDADE')
+    Left = 128
+    Top = 87
+  end
+  object dsCidades: TDataSource
+    DataSet = fdQryCidades
+    Left = 128
+    Top = 144
+  end
+  object fdQryFornecedor: TFDQuery
+    Connection = dmConexao.fdConexao
+    Transaction = fdTransaction
+    SQL.Strings = (
+      'SELECT * FROM FORNECEDOR')
+    Left = 208
+    Top = 88
+  end
+  object dsFornecedor: TDataSource
+    DataSet = fdQryFornecedor
+    Left = 208
+    Top = 144
+  end
+end

@@ -1,0 +1,60 @@
+inherited frmCadastroEstado: TfrmCadastroEstado
+  Caption = 'Cadastro de estados'
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel [0]
+    Left = 8
+    Top = 56
+    Width = 81
+    Height = 13
+    Caption = 'ID_ESTADO_EST'
+    FocusControl = DBEdit1
+  end
+  object Label2: TLabel [1]
+    Left = 8
+    Top = 104
+    Width = 53
+    Height = 13
+    Caption = 'NOME_EST'
+    FocusControl = DBEdit2
+  end
+  object DBEdit1: TDBEdit [3]
+    Left = 8
+    Top = 72
+    Width = 134
+    Height = 21
+    DataField = 'ID_ESTADO_EST'
+    DataSource = dsCadastro
+    TabOrder = 1
+  end
+  object DBEdit2: TDBEdit [4]
+    Left = 8
+    Top = 120
+    Width = 300
+    Height = 21
+    DataField = 'NOME_EST'
+    DataSource = dsCadastro
+    TabOrder = 2
+  end
+  inherited fdQryCadastro: TFDQuery
+    UpdateOptions.AssignedValues = [uvFetchGeneratorsPoint, uvGeneratorName]
+    UpdateOptions.FetchGeneratorsPoint = gpImmediate
+    UpdateOptions.GeneratorName = 'GEN_ESTADO_ID'
+    UpdateOptions.AutoIncFields = 'ID_ESTADO_EST'
+    SQL.Strings = (
+      'SELECT *'
+      'FROM'
+      'ESTADO')
+    object fdQryCadastroID_ESTADO_EST: TFDAutoIncField
+      FieldName = 'ID_ESTADO_EST'
+      Origin = 'ID_ESTADO_EST'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      IdentityInsert = True
+    end
+    object fdQryCadastroNOME_EST: TWideStringField
+      FieldName = 'NOME_EST'
+      Origin = 'NOME_EST'
+      Size = 60
+    end
+  end
+end

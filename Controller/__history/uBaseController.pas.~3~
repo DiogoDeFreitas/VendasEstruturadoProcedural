@@ -1,0 +1,16 @@
+unit uBaseController;
+
+interface
+
+type
+  TBaseController = Class
+    private
+
+    public
+      function GetNomeTabela: String; Virtual;
+      function GetChavePrimaria: String; Virtual;
+  End;
+
+implementation
+
+end.

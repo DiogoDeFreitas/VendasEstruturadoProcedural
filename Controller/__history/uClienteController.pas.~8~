@@ -1,0 +1,34 @@
+unit uClienteController;
+
+interface
+
+uses uClienteModel, uClienteDAO;
+
+type
+  TClienteController = Class
+    private
+
+    public
+      function GetNomeTabela: String;
+      function GetChavePrimaria: String;
+      function Gravar(Cliente: TCliente): Boolean;
+  End;
+
+implementation
+
+function TClienteController.GetChavePrimaria: String;
+begin
+  Result := 'ID_CLIENTE_CLI';
+end;
+
+function TClienteController.GetNomeTabela: String;
+begin
+  Result := 'CLIENTE';
+end;
+
+function TClienteController.Gravar(Cliente: TCliente): Boolean;
+begin
+  Result := frmClienteDAO.Gravar(Cliente);
+end;
+
+end.

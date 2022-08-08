@@ -1,0 +1,135 @@
+inherited frmCadastroUsuarios: TfrmCadastroUsuarios
+  Caption = 'Cadastro de Usuarios'
+  ClientHeight = 314
+  ClientWidth = 551
+  ExplicitWidth = 557
+  ExplicitHeight = 342
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel [0]
+    Left = 8
+    Top = 56
+    Width = 41
+    Height = 13
+    Caption = 'C'#211'DIGO'
+  end
+  object Label2: TLabel [1]
+    Left = 144
+    Top = 56
+    Width = 29
+    Height = 13
+    Caption = 'NOME'
+  end
+  object Label3: TLabel [2]
+    Left = 280
+    Top = 56
+    Width = 31
+    Height = 13
+    Caption = 'LOGIN'
+  end
+  object Label4: TLabel [3]
+    Left = 416
+    Top = 56
+    Width = 33
+    Height = 13
+    Caption = 'SENHA'
+  end
+  inherited pnlCabecalho: TPanel
+    Width = 551
+    ExplicitWidth = 551
+    inherited btnSair: TBitBtn
+      Left = 475
+      Top = 1
+      Height = 39
+      Align = alRight
+      ExplicitLeft = 475
+      ExplicitTop = 1
+      ExplicitHeight = 39
+    end
+  end
+  object DBEdit1: TDBEdit [5]
+    Left = 8
+    Top = 72
+    Width = 121
+    Height = 21
+    DataField = 'ID_USUARIO'
+    DataSource = dsCadastro
+    Enabled = False
+    TabOrder = 1
+  end
+  object DBEdit2: TDBEdit [6]
+    Left = 144
+    Top = 72
+    Width = 121
+    Height = 21
+    DataField = 'NOME'
+    DataSource = dsCadastro
+    TabOrder = 2
+  end
+  object DBEdit3: TDBEdit [7]
+    Left = 280
+    Top = 72
+    Width = 121
+    Height = 21
+    CharCase = ecUpperCase
+    DataField = 'LOGIN'
+    DataSource = dsCadastro
+    TabOrder = 3
+  end
+  object DBEdit4: TDBEdit [8]
+    Left = 416
+    Top = 72
+    Width = 121
+    Height = 21
+    DataField = 'SENHA'
+    DataSource = dsCadastro
+    PasswordChar = '*'
+    TabOrder = 4
+  end
+  inherited fdQryCadastro: TFDQuery
+    BeforePost = fdQryCadastroBeforePost
+    UpdateOptions.AssignedValues = [uvFetchGeneratorsPoint, uvGeneratorName]
+    UpdateOptions.FetchGeneratorsPoint = gpImmediate
+    UpdateOptions.GeneratorName = 'GEN_USUARIO_ID'
+    UpdateOptions.AutoIncFields = 'ID_USUARIO'
+    SQL.Strings = (
+      'SELECT * '
+      'FROM USUARIO'
+      'WHERE 1 = 1'
+      'AND DT_EXCLUIDO IS NULL')
+    Left = 512
+    object fdQryCadastroID_USUARIO: TFDAutoIncField
+      FieldName = 'ID_USUARIO'
+      Origin = 'ID_USUARIO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      IdentityInsert = True
+    end
+    object fdQryCadastroNOME: TWideStringField
+      FieldName = 'NOME'
+      Origin = 'NOME'
+      Size = 40
+    end
+    object fdQryCadastroLOGIN: TWideStringField
+      FieldName = 'LOGIN'
+      Origin = 'LOGIN'
+    end
+    object fdQryCadastroSENHA: TWideStringField
+      FieldName = 'SENHA'
+      Origin = 'SENHA'
+      Size = 255
+    end
+    object fdQryCadastroDT_EXCLUIDO: TDateField
+      FieldName = 'DT_EXCLUIDO'
+      Origin = 'DT_EXCLUIDO'
+    end
+  end
+  inherited fdUpdCadastro: TFDUpdateSQL
+    Left = 512
+  end
+  inherited fdTransaction: TFDTransaction
+    Left = 513
+  end
+  inherited dsCadastro: TDataSource
+    Left = 512
+  end
+end

@@ -1,0 +1,58 @@
+unit ufrmFiltroPai;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.Client, Data.DB,
+  FireDAC.Comp.DataSet, Vcl.Grids, Vcl.DBGrids;
+
+type
+  TfrmFiltroPai = class(TForm)
+    Panel1: TPanel;
+    edtFiltro: TEdit;
+    btnFiltro: TButton;
+    fdQryFiltro: TFDQuery;
+    dsFiltro: TDataSource;
+    fdTransaction: TFDTransaction;
+    Label1: TLabel;
+    Panel2: TPanel;
+    btnSair: TButton;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnSairClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure ValidaQueryVazia;
+  end;
+
+var
+  frmFiltroPai: TfrmFiltroPai;
+
+implementation
+
+{$R *.dfm}
+
+uses udmConexao;
+
+procedure TfrmFiltroPai.btnSairClick(Sender: TObject);
+begin
+  Self.Close;
+end;
+
+procedure TfrmFiltroPai.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := caFree;
+end;
+
+procedure TfrmFiltroPai.ValidaQueryVazia;
+begin
+  if fdQryFiltro.IsEmpty then
+    raise Exception.Create('Pesquise um registro');
+end;
+
+end.

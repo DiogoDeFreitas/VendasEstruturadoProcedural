@@ -1,0 +1,146 @@
+unit uClienteDAO;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.Client,
+  Data.DB, FireDAC.Comp.DataSet, uClienteModel;
+
+type
+  TfrmClienteDAO = class(TForm)
+    fdQryCadastro: TFDQuery;
+    fdQryCadastroID_CLIENTE_CLI: TIntegerField;
+    fdQryCadastroRAZAO_SOCIAL_CLI: TWideStringField;
+    fdQryCadastroFANTASIA_CLI: TWideStringField;
+    fdQryCadastroCPF_CNPJ_CLI: TWideStringField;
+    fdQryCadastroTIPO_FJ_CLI: TWideStringField;
+    fdQryCadastroNOME_CLI: TWideStringField;
+    fdQryCadastroEMAIL_CLI: TWideStringField;
+    fdQryCadastroSITE_CLI: TWideStringField;
+    fdQryCadastroENDERECO_CLI: TWideStringField;
+    fdQryCadastroCOMPLEMENTO_CLI: TWideStringField;
+    fdQryCadastroNUMERO_CLI: TWideStringField;
+    fdQryCadastroBAIRRO_CLI: TWideStringField;
+    fdQryCadastroIE_CLI: TWideStringField;
+    fdQryCadastroIM_CLI: TWideStringField;
+    fdQryCadastroID_CIDADE_CID: TIntegerField;
+    fdQryCadastroID_ESTADO_EST: TIntegerField;
+    fdQryCadastroDT_EXCLUIDO: TDateField;
+    fdUpdCadastro: TFDUpdateSQL;
+    fdTransaction: TFDTransaction;
+  private
+    { Private declarations }
+
+  public
+    procedure Gravar(Cliente: TCliente);
+    procedure Alterar(Cliente: TCliente; IdCliente: Integer);
+  end;
+
+var
+  frmClienteDAO: TfrmClienteDAO;
+
+implementation
+
+{$R *.dfm}
+
+uses udmConexao, uClienteController;
+
+{ TfrmClienteDAO }
+
+procedure TfrmClienteDAO.Alterar(Cliente: TCliente; IdCliente: Integer);
+var
+  fdQryAlterar: TFDQuery;
+  ClienteController: TClienteController;
+begin
+  fdQryAlterar := TFDQuery.Create(nil);
+  ClienteController := TClienteController.Create;
+  fdQryAlterar.Connection := dmConexao.fdConexao;
+  try
+    with fdQryAlterar, Cliente, ClienteController do
+      begin
+        SQL.Clear;
+        SQL.Add('UPDATE ' + GetNomeTabela +
+                'SET RAZAO_SOCIAL_CLI =:RAZAO_SOCIAL_CLI, ' +
+                'FANTASIA_CLI =:FANTASIA_CLI, ' +
+                'CPF_CNPJ_CLI =:CPF_CNPJ_CLI, ' +
+                'TIPO_FJ_CLI =:TIPO_FJ_CLI ,' +
+                'NOME_CLI =:NOME_CLI, ' +
+                'EMAIL_CLI =:EMAIL_CLI, ' +
+                'SITE_CLI =:SITE_CLI, ' +
+                'ENDERECO_CLI =:ENDERECO_CLI, ' +
+                'COMPLEMENTO_CLI =:COMPLEMENTO_CLI, ' +
+                'NUMERO_CLI =:NUMERO_CLI, ' +
+                'BAIRRO_CLI =:BAIRRO_CLI, ' +
+                'IE_CLI =:IE_CLI, ' +
+                'IM_CLI =:IM_CLI, ' +
+                'ID_CIDADE_CID =:ID_CIDADE_CID, ' +
+                'ID_ESTADO_EST =:ID_ESTADO_EST ' +
+                'WHERE (ID_CLIENTE_CLI =:ID_CLIENTE_CLI)');
+        ParamByName('RAZAO_SOCIAL_CLI').AsString := RAZAOSOCIAL;
+        ParamByName('FANTASIA_CLI').AsString := FANTASIACLI;
+        ParamByName('CPF_CNPJ_CLI').AsString := CPFCNPJCLI;
+        ParamByName('TIPO_FJ_CLI').AsString := TIPOFJCLI;
+        ParamByName('NOME_CLI').AsString := NOMECLI;
+        ParamByName('EMAIL_CLI').AsString := EMAILCLI;
+        ParamByName('SITE_CLI').AsString := SITECLI;
+        ParamByName('ENDERECO_CLI').AsString := ENDERECOCLI;
+        ParamByName('NUMERO_CLI').AsString := NUMEROCLI;
+        ParamByName('BAIRRO_CLI').AsString := BAIRROCLI;
+        ParamByName('IE_CLI').AsString := IECLI;
+        ParamByName('IM_CLI').AsString := IMCLI;
+        ParamByName('ID_CIDADE_CID').AsInteger := IDCIDADECID;
+        ParamByName('ID_ESTADO_EST').AsInteger := IDESTADOEST;
+        ParamByName('ID_CLIENTE_CLI').AsInteger := IdCliente;
+
+        //SQL.SaveToFile('C:\temp\sql.txt');
+        ExecSQL;
+      end;
+  finally
+    FreeAndNil(fdQryAlterar);
+    FreeAndNil(ClienteController);
+  end;
+
+end;
+
+procedure TfrmClienteDAO.Gravar(Cliente: TCliente);
+var
+  fdQryGravar: TFDQuery;
+begin
+  fdQryGravar := TFDQuery.Create(nil);
+  fdQryGravar.Connection := dmConexao.fdConexao;
+  with fdQryGravar, Cliente do
+  begin
+    SQL.Clear;
+    SQL.Add('INSERT INTO CLIENTE (ID_CLIENTE_CLI, RAZAO_SOCIAL_CLI, FANTASIA_CLI, ' +
+            'CPF_CNPJ_CLI, TIPO_FJ_CLI, NOME_CLI, EMAIL_CLI, SITE_CLI, ENDERECO_CLI, ' +
+            'COMPLEMENTO_CLI, NUMERO_CLI, BAIRRO_CLI, IE_CLI, IM_CLI, ' +
+            'ID_CIDADE_CID, ID_ESTADO_EST) ' +
+            'VALUES (:ID_CLIENTE_CLI, :RAZAO_SOCIAL_CLI, :FANTASIA_CLI, :CPF_CNPJ_CLI,' +
+            ':TIPO_FJ_CLI, :NOME_CLI, :EMAIL_CLI, :SITE_CLI, :ENDERECO_CLI,' +
+            ':COMPLEMENTO_CLI, :NUMERO_CLI, :BAIRRO_CLI, :IE_CLI, :IM_CLI, ' +
+            ':ID_CIDADE_CID, :ID_ESTADO_EST) ');
+    ParamByName('RAZAO_SOCIAL_CLI').AsString := RAZAOSOCIAL;
+    ParamByName('FANTASIA_CLI').AsString := FANTASIACLI;
+    ParamByName('CPF_CNPJ_CLI').AsString := CPFCNPJCLI;
+    ParamByName('TIPO_FJ_CLI').AsString := TIPOFJCLI;
+    ParamByName('NOME_CLI').AsString := NOMECLI;
+    ParamByName('EMAIL_CLI').AsString := EMAILCLI;
+    ParamByName('SITE_CLI').AsString := SITECLI;
+    ParamByName('ENDERECO_CLI').AsString := ENDERECOCLI;
+    ParamByName('COMPLEMENTO_CLI').AsString := COMPLEMENTOCLI;
+    ParamByName('NUMERO_CLI').AsString := NUMEROCLI;
+    ParamByName('BAIRRO_CLI').AsString := BAIRROCLI;
+    ParamByName('IE_CLI').AsString := IECLI;
+    ParamByName('IM_CLI').AsString := IMCLI;
+    ParamByName('ID_CIDADE_CID').AsInteger := IDCIDADECID;
+    ParamByName('ID_ESTADO_EST').AsInteger := IDESTADOEST;
+
+    //SQL.SaveToFile('C:\temp\sql.txt');
+    ExecSQL;
+  end;
+end;
+
+end.

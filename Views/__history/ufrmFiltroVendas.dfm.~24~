@@ -1,0 +1,178 @@
+inherited frmFiltroVendas: TfrmFiltroVendas
+  Caption = 'Filtro de Vendas'
+  ClientWidth = 955
+  FormStyle = fsMDIChild
+  Visible = True
+  WindowState = wsMaximized
+  OnShow = FormShow
+  ExplicitWidth = 971
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 955
+    ExplicitWidth = 955
+    inherited Label1: TLabel
+      Width = 33
+      Caption = 'Cliente'
+      ExplicitWidth = 33
+    end
+    object Label2: TLabel [1]
+      Left = 271
+      Top = 7
+      Width = 36
+      Height = 13
+      Caption = 'Periodo'
+    end
+    object Label3: TLabel [2]
+      Left = 480
+      Top = 7
+      Width = 33
+      Height = 13
+      Caption = 'C'#243'digo'
+    end
+    inherited edtFiltro: TEdit
+      Width = 254
+      ExplicitWidth = 254
+    end
+    inherited btnFiltro: TButton
+      Left = 688
+      Caption = 'Filtrar'
+      OnClick = btnFiltroClick
+      ExplicitLeft = 688
+    end
+    inherited Panel2: TPanel
+      Left = 854
+      ExplicitLeft = 854
+    end
+    object edtDataIni: TDateTimePicker
+      Left = 271
+      Top = 26
+      Width = 93
+      Height = 21
+      Date = 44718.564505162040000000
+      Time = 44718.564505162040000000
+      TabOrder = 3
+    end
+    object edtDataFim: TDateTimePicker
+      Left = 375
+      Top = 26
+      Width = 93
+      Height = 21
+      Date = 44718.564505162040000000
+      Time = 44718.564505162040000000
+      TabOrder = 4
+    end
+    object edtCodVenda: TEdit
+      Left = 480
+      Top = 26
+      Width = 85
+      Height = 21
+      TabOrder = 5
+    end
+    object cbFaturado: TCheckBox
+      Left = 584
+      Top = 28
+      Width = 77
+      Height = 17
+      Caption = 'Faturado'
+      TabOrder = 6
+    end
+    object btnImprimir: TButton
+      Left = 773
+      Top = 23
+      Width = 75
+      Height = 28
+      Caption = 'Imprimir'
+      TabOrder = 7
+    end
+  end
+  object DBGrid1: TDBGrid [1]
+    Left = 0
+    Top = 70
+    Width = 955
+    Height = 268
+    Align = alClient
+    DataSource = dsFiltro
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  inherited dsFiltro: TDataSource
+    DataSet = fdQryFiltro
+  end
+  object frVendas: TfrxReport
+    Version = '5.3.14'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 44718.677713090280000000
+    ReportOptions.LastChange = 44718.677713090280000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 456
+    Top = 104
+    Datasets = <>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      object Header1: TfrxHeader
+        FillType = ftBrush
+        Height = 49.133890000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object Memo1: TfrxMemoView
+          Top = 15.118120000000000000
+          Width = 718.110236220000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'RELAT'#211'RIO DE VENDAS')
+          ParentFont = False
+        end
+      end
+      object GroupHeader1: TfrxGroupHeader
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 90.708720000000000000
+        Width = 718.110700000000000000
+      end
+    end
+  end
+  object frDBVendas: TfrxDBDataset
+    UserName = 'frDBVendas'
+    CloseDataSource = False
+    DataSet = fdQryRelatorio
+    BCDToCurrency = False
+    Left = 456
+    Top = 176
+  end
+  object fdQryRelatorio: TFDQuery
+    Left = 456
+    Top = 248
+  end
+end

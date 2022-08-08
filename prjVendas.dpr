@@ -1,0 +1,41 @@
+program prjVendas;
+
+uses
+  Vcl.Forms,
+  udmConexao in 'Views\udmConexao.pas' {dmConexao: TDataModule},
+  uBiblioteca in 'classes\uBiblioteca.pas',
+  ufrmConfigBanco in 'Views\ufrmConfigBanco.pas' {frmConfigBanco},
+  ufrmCadastroPai in 'Views\ufrmCadastroPai.pas' {frmCadastroPai},
+  ufrmCadastroCliente in 'Views\ufrmCadastroCliente.pas' {frmCadastroCliente},
+  ufrmCadastroEstado in 'Views\ufrmCadastroEstado.pas' {frmCadastroEstado},
+  ufrmCadastroCidades in 'Views\ufrmCadastroCidades.pas' {frmCadastroCidades},
+  uLookUp in 'shared\uLookUp.pas' {dmLookUp: TDataModule},
+  ufrmPrincipal in 'Views\ufrmPrincipal.pas' {frmPrincipal},
+  ufrmFiltroPai in 'Views\ufrmFiltroPai.pas' {frmFiltroPai},
+  ufrmFiltroClientes in 'Views\ufrmFiltroClientes.pas' {frmFiltroClientes},
+  ufrmCadastroFornecedor in 'Views\ufrmCadastroFornecedor.pas' {frmCadastroFornecedor},
+  ufrmFiltroFornecedor in 'Views\ufrmFiltroFornecedor.pas' {frmFiltroFornecedor},
+  ufrmFiltroProdutos in 'Views\ufrmFiltroProdutos.pas' {frmFiltroProdutos},
+  ufrmCadastroProdutos in 'Views\ufrmCadastroProdutos.pas' {frmCadastroProdutos},
+  ufrmCadastroVenda in 'Views\ufrmCadastroVenda.pas' {frmCadastroVenda},
+  ufrmFiltroVendas in 'Views\ufrmFiltroVendas.pas' {frmFiltroVendas},
+  uClienteModel in 'Model\uClienteModel.pas',
+  uClienteController in 'Controller\uClienteController.pas',
+  uBaseModel in 'Model\uBaseModel.pas',
+  uBaseController in 'Controller\uBaseController.pas',
+  ufrmFiltroUsuarios in 'Views\ufrmFiltroUsuarios.pas' {frmFiltroUsuarios},
+  ufrmCadastroUsuarios in 'Views\ufrmCadastroUsuarios.pas' {frmCadastroUsuarios},
+  uCrpt in 'classes\uCrpt.pas',
+  ufrmLogin in 'Views\ufrmLogin.pas' {frmLogin},
+  uClienteDAO in 'DAO\uClienteDAO.pas' {frmClienteDAO};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TdmConexao, dmConexao);
+  Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TdmLookUp, dmLookUp);
+  Application.Run;
+end.

@@ -1,0 +1,191 @@
+unit ufrmCadastroCliente;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ufrmCadastroPai, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.Client, Data.DB, FireDAC.Comp.DataSet, Vcl.StdCtrls, Vcl.Buttons,
+  Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Mask, uLookUp, uClienteModel,
+  uClienteController, udmConexao;
+
+type
+  TfrmCadastroCliente = class(TfrmCadastroPai)
+    fdQryCadastroID_CLIENTE_CLI: TIntegerField;
+    fdQryCadastroRAZAO_SOCIAL_CLI: TWideStringField;
+    fdQryCadastroFANTASIA_CLI: TWideStringField;
+    fdQryCadastroCPF_CNPJ_CLI: TWideStringField;
+    fdQryCadastroTIPO_FJ_CLI: TWideStringField;
+    fdQryCadastroNOME_CLI: TWideStringField;
+    fdQryCadastroEMAIL_CLI: TWideStringField;
+    fdQryCadastroSITE_CLI: TWideStringField;
+    fdQryCadastroENDERECO_CLI: TWideStringField;
+    fdQryCadastroCOMPLEMENTO_CLI: TWideStringField;
+    fdQryCadastroNUMERO_CLI: TWideStringField;
+    fdQryCadastroBAIRRO_CLI: TWideStringField;
+    fdQryCadastroIE_CLI: TWideStringField;
+    fdQryCadastroIM_CLI: TWideStringField;
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
+    Label2: TLabel;
+    edtRazaoSocial: TDBEdit;
+    Label3: TLabel;
+    DBEdit3: TDBEdit;
+    Label4: TLabel;
+    DBEdit4: TDBEdit;
+    Label5: TLabel;
+    dbComboBoxFJ: TDBComboBox;
+    Label6: TLabel;
+    DBEdit5: TDBEdit;
+    Label7: TLabel;
+    DBEdit6: TDBEdit;
+    Label8: TLabel;
+    DBEdit7: TDBEdit;
+    Label9: TLabel;
+    DBEdit8: TDBEdit;
+    Label10: TLabel;
+    DBEdit9: TDBEdit;
+    Label11: TLabel;
+    DBEdit10: TDBEdit;
+    Label12: TLabel;
+    DBEdit11: TDBEdit;
+    fdQryCadastroID_CIDADE_CID: TIntegerField;
+    fdQryCadastroID_ESTADO_EST: TIntegerField;
+    DBLookupComboBoxCidade: TDBLookupComboBox;
+    DBLookupComboBoxEstado: TDBLookupComboBox;
+    Label13: TLabel;
+    Label14: TLabel;
+    fdQryCadastroDT_EXCLUIDO: TDateField;
+    procedure FormShow(Sender: TObject);
+    procedure fdQryCadastroBeforeInsert(DataSet: TDataSet);
+    procedure fdQryCadastroBeforeEdit(DataSet: TDataSet);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+    procedure Gravar; Override;
+    procedure Alterar; Override;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadastroCliente: TfrmCadastroCliente;
+
+implementation
+
+{$R *.dfm}
+
+
+procedure TfrmCadastroCliente.Alterar;
+var
+  Cliente: TCliente;
+  ClienteController: TClienteController;
+begin
+  inherited;
+  Cliente := TCliente.Create;
+  ClienteController := TClienteController.Create;
+  try
+    with Cliente do
+    begin
+      IDCLIENTE := dsCadastro.DataSet.FieldByName('ID_CLIENTE_CLI').AsInteger;
+      RAZAOSOCIAL := dsCadastro.DataSet.FieldByName('RAZAO_SOCIAL_CLI').AsString;
+      FANTASIACLI := dsCadastro.DataSet.FieldByName('FANTASIA_CLI').AsString;
+      CPFCNPJCLI := dsCadastro.DataSet.FieldByName('CPF_CNPJ_CLI').AsString;
+      TIPOFJCLI := dbComboBoxFJ.Text;
+      NOMECLI := dsCadastro.DataSet.FieldByName('NOME_CLI').AsString;
+      EMAILCLI := dsCadastro.DataSet.FieldByName('EMAIL_CLI').AsString;
+      SITECLI := dsCadastro.DataSet.FieldByName('SITE_CLI').AsString;
+      ENDERECOCLI := dsCadastro.DataSet.FieldByName('ENDERECO_CLI').AsString;
+      COMPLEMENTOCLI := dsCadastro.DataSet.FieldByName('COMPLEMENTO_CLI').AsString;
+      NUMEROCLI := dsCadastro.DataSet.FieldByName('NUMERO_CLI').AsString;
+      BAIRROCLI := dsCadastro.DataSet.FieldByName('BAIRRO_CLI').AsString;
+      IECLI := dsCadastro.DataSet.FieldByName('IE_CLI').AsString;
+      IMCLI := dsCadastro.DataSet.FieldByName('IM_CLI').AsString;
+      if DBLookupComboBoxCidade.KeyValue <> null then
+        IDCIDADECID := DBLookupComboBoxCidade.KeyValue;
+      if DBLookupComboBoxEstado.KeyValue <> null then
+        IDESTADOEST := DBLookupComboBoxEstado.KeyValue;
+      try
+        ClienteController.Alterar(Cliente, dsCadastro.DataSet.FieldByName('ID_CLIENTE_CLI').AsInteger);
+      Except
+        raise Exception.Create('Erro ao gravar os dados');
+      end;
+    end;
+  finally
+    FreeAndNil(Cliente);
+    FreeAndNil(ClienteController);
+  end;
+end;
+
+procedure TfrmCadastroCliente.fdQryCadastroBeforeEdit(DataSet: TDataSet);
+begin
+  inherited;
+  if Self.Visible then
+    edtRazaoSocial.SetFocus;
+end;
+
+procedure TfrmCadastroCliente.fdQryCadastroBeforeInsert(DataSet: TDataSet);
+begin
+  inherited;
+  if Self.Visible then
+    edtRazaoSocial.SetFocus;
+end;
+
+procedure TfrmCadastroCliente.FormCreate(Sender: TObject);
+begin
+  fdQryCadastro.Open();
+end;
+
+procedure TfrmCadastroCliente.FormShow(Sender: TObject);
+begin
+  inherited;
+  dmLookUp.fdQryEstados.Open();
+  dmLookUp.fdQryEstados.FetchAll;
+
+  dmLookUp.fdQryCidades.Open();
+  dmLookUp.fdQryEstados.FetchAll;
+
+  edtRazaoSocial.SetFocus;
+end;
+
+procedure TfrmCadastroCliente.Gravar;
+var
+  Cliente: TCliente;
+  ClienteController: TClienteController;
+begin
+  Cliente := TCliente.Create;
+  ClienteController := TClienteController.Create;
+  try
+    with Cliente do
+    begin
+      RAZAOSOCIAL := dsCadastro.DataSet.FieldByName('RAZAO_SOCIAL_CLI').AsString;
+      FANTASIACLI := dsCadastro.DataSet.FieldByName('FANTASIA_CLI').AsString;
+      CPFCNPJCLI := dsCadastro.DataSet.FieldByName('CPF_CNPJ_CLI').AsString;
+      TIPOFJCLI := dbComboBoxFJ.Text;
+      NOMECLI := dsCadastro.DataSet.FieldByName('NOME_CLI').AsString;
+      EMAILCLI := dsCadastro.DataSet.FieldByName('EMAIL_CLI').AsString;
+      SITECLI := dsCadastro.DataSet.FieldByName('SITE_CLI').AsString;
+      ENDERECOCLI := dsCadastro.DataSet.FieldByName('ENDERECO_CLI').AsString;
+      COMPLEMENTOCLI := dsCadastro.DataSet.FieldByName('COMPLEMENTO_CLI').AsString;
+      NUMEROCLI := dsCadastro.DataSet.FieldByName('NUMERO_CLI').AsString;
+      BAIRROCLI := dsCadastro.DataSet.FieldByName('BAIRRO_CLI').AsString;
+      IECLI := dsCadastro.DataSet.FieldByName('IE_CLI').AsString;
+      IMCLI := dsCadastro.DataSet.FieldByName('IM_CLI').AsString;
+      IDCIDADECID := DBLookupComboBoxCidade.KeyValue;
+      IDESTADOEST := DBLookupComboBoxEstado.KeyValue;
+      try
+        ClienteController.Gravar(Cliente);
+      Except
+        raise Exception.Create('Erro ao gravar os dados');
+      end;
+
+    end;
+  finally
+    FreeAndNil(Cliente);
+    FreeAndNil(ClienteController);
+  end;
+end;
+
+end.

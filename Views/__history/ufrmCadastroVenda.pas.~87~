@@ -1,0 +1,289 @@
+unit ufrmCadastroVenda;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ufrmCadastroPai, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  Data.DB, FireDAC.Comp.Client, FireDAC.Comp.DataSet, Vcl.StdCtrls, Vcl.Buttons,
+  Vcl.ExtCtrls, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
+  cxContainer, cxEdit, cxDBEdit, cxDropDownEdit, cxCalendar, cxTextEdit,
+  cxMaskEdit, cxSpinEdit, Vcl.Mask, Vcl.DBCtrls, AdvEdit, AdvMoneyEdit,
+  DBAdvMoneyEdit, Vcl.Grids, Vcl.DBGrids, frxClass, frxDBSet;
+
+type
+  TfrmCadastroVenda = class(TfrmCadastroPai)
+    fdQryCadastroID_VENDA_VEN: TIntegerField;
+    fdQryCadastroID_CLIENTE_CLI: TIntegerField;
+    fdQryCadastroDATA_VEN: TDateField;
+    fdQryCadastroFATURADO_VEN: TWideStringField;
+    fdQryCadastroDATA_FATURADO_VEN: TDateField;
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label5: TLabel;
+    DBEdit1: TDBEdit;
+    DBEdit3: TDBEdit;
+    DBEdit5: TDBEdit;
+    DBLookupComboBox1: TDBLookupComboBox;
+    DBCheckBox1: TDBCheckBox;
+    fdQryItens: TFDQuery;
+    dsItens: TDataSource;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    DBLCBItem: TDBLookupComboBox;
+    edtQtd: TAdvMoneyEdit;
+    edtVlrUnt: TAdvMoneyEdit;
+    edtDesconto: TAdvMoneyEdit;
+    edtSubTotal: TAdvMoneyEdit;
+    DBGrid1: TDBGrid;
+    edtTotal: TAdvMoneyEdit;
+    Label4: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Button1: TButton;
+    fdQryItensDescricaoProduto: TStringField;
+    fdQryItensSubTotal: TFloatField;
+    fdQryItensTotal: TFloatField;
+    fdtransItem: TFDTransaction;
+    Label11: TLabel;
+    edtTotSubTotal: TAdvMoneyEdit;
+    edtTotDesconto: TAdvMoneyEdit;
+    Label13: TLabel;
+    edtTotTotal: TAdvMoneyEdit;
+    Label12: TLabel;
+    fdQryItensID_VENDA_ITEM_VIT: TFDAutoIncField;
+    fdQryItensID_PRODUTO_PRO: TIntegerField;
+    fdQryItensQTD_VIT: TSingleField;
+    fdQryItensVALOR_UNITARIO_VIT: TSingleField;
+    fdQryItensDESCONTO_VIT: TSingleField;
+    fdQryItensID_VENDA_VEN: TIntegerField;
+    Button2: TButton;
+    frVenda: TfrxReport;
+    frxDBDatasetVenda: TfrxDBDataset;
+    frxDBDatasetItensVenda: TfrxDBDataset;
+    btnImprimir: TBitBtn;
+    procedure FormCreate(Sender: TObject);
+    procedure fdQryCadastroBeforePost(DataSet: TDataSet);
+    procedure fdQryCadastroAfterInsert(DataSet: TDataSet);
+    procedure fdQryItensAfterInsert(DataSet: TDataSet);
+    procedure fdQryCadastroAfterOpen(DataSet: TDataSet);
+    procedure fdQryCadastroAfterScroll(DataSet: TDataSet);
+    procedure fdQryItensCalcFields(DataSet: TDataSet);
+    procedure fdQryItensAfterPost(DataSet: TDataSet);
+    procedure fdQryItensAfterDelete(DataSet: TDataSet);
+    procedure fdQryItensAfterCancel(DataSet: TDataSet);
+    procedure Button1Click(Sender: TObject);
+    procedure DBLCBItemClick(Sender: TObject);
+    procedure edtQtdChange(Sender: TObject);
+    procedure edtVlrUntChange(Sender: TObject);
+    procedure edtDescontoChange(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
+  private
+    procedure SetItens(pIdVenda: Integer);
+    procedure SetDadosProduto(pIdProduto: Integer);
+    procedure GravaItem;
+    procedure Totaliza;
+    procedure TotalItem;
+    procedure LimpaCampos;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadastroVenda: TfrmCadastroVenda;
+
+implementation
+
+{$R *.dfm}
+
+uses uLookUp, uBiblioteca, udmConexao;
+
+procedure TfrmCadastroVenda.btnImprimirClick(Sender: TObject);
+begin
+  inherited;
+  frVenda.Variables.Variables['Cliente'] := QuotedStr(DBLookupComboBox1.Text);
+  CarregaRelatorio(frVenda);
+end;
+
+procedure TfrmCadastroVenda.Button1Click(Sender: TObject);
+begin
+  inherited;
+  GravaItem;
+  LimpaCampos;
+end;
+
+procedure TfrmCadastroVenda.Button2Click(Sender: TObject);
+begin
+  inherited;
+  fdQryItens.Delete;
+end;
+
+procedure TfrmCadastroVenda.DBLCBItemClick(Sender: TObject);
+begin
+  inherited;
+  SetDadosProduto(DBLCBItem.KeyValue);
+end;
+
+procedure TfrmCadastroVenda.edtDescontoChange(Sender: TObject);
+begin
+  inherited;
+  TotalItem;
+end;
+
+procedure TfrmCadastroVenda.edtQtdChange(Sender: TObject);
+begin
+  inherited;
+  TotalItem;
+end;
+
+procedure TfrmCadastroVenda.edtVlrUntChange(Sender: TObject);
+begin
+  inherited;
+  TotalItem;
+end;
+
+procedure TfrmCadastroVenda.fdQryCadastroAfterInsert(DataSet: TDataSet);
+begin
+  inherited;
+  fdQryCadastroDATA_VEN.AsDateTime := Date;
+end;
+
+procedure TfrmCadastroVenda.fdQryCadastroAfterOpen(DataSet: TDataSet);
+begin
+  inherited;
+  SetItens(fdQryCadastroID_VENDA_VEN.AsInteger);
+end;
+
+procedure TfrmCadastroVenda.fdQryCadastroAfterScroll(DataSet: TDataSet);
+begin
+  inherited;
+  SetItens(fdQryCadastroID_VENDA_VEN.AsInteger);
+end;
+
+procedure TfrmCadastroVenda.fdQryCadastroBeforePost(DataSet: TDataSet);
+begin
+  inherited;
+  if fdQryCadastroDATA_FATURADO_VEN.IsNull and
+    (fdQryCadastroFATURADO_VEN.AsString = 'S')  then
+    fdQryCadastroDATA_FATURADO_VEN.AsDateTime := Date;
+end;
+
+procedure TfrmCadastroVenda.fdQryItensAfterCancel(DataSet: TDataSet);
+begin
+  inherited;
+  fdtransItem.RollbackRetaining;
+end;
+
+procedure TfrmCadastroVenda.fdQryItensAfterDelete(DataSet: TDataSet);
+begin
+  fdtransItem.StartTransaction;
+  inherited;
+  fdtransItem.CommitRetaining;
+  Totaliza;
+end;
+
+procedure TfrmCadastroVenda.fdQryItensAfterInsert(DataSet: TDataSet);
+begin
+  inherited;
+  fdQryItensID_VENDA_VEN.AsInteger := fdQryCadastroID_VENDA_VEN.AsInteger;
+end;
+
+procedure TfrmCadastroVenda.fdQryItensAfterPost(DataSet: TDataSet);
+begin
+  fdtransItem.StartTransaction;
+  inherited;
+  fdtransItem.CommitRetaining;
+  Totaliza;
+end;
+
+procedure TfrmCadastroVenda.fdQryItensCalcFields(DataSet: TDataSet);
+begin
+  inherited;
+  //calcula subtotal
+  fdQryItensSubTotal.AsFloat := (fdQryItensQTD_VIT.AsFloat * fdQryItensVALOR_UNITARIO_VIT.AsFloat);
+  //calcula total
+  fdQryItensTotal.AsFloat := (fdQryItensQTD_VIT.AsFloat * fdQryItensVALOR_UNITARIO_VIT.AsFloat) -
+                              fdQryItensDESCONTO_VIT.AsFloat;
+end;
+
+procedure TfrmCadastroVenda.FormCreate(Sender: TObject);
+begin
+  inherited;
+  AtualizaFDQuery(dmLookUp.fdQryCliente, '');
+  AtualizaFDQuery(dmLookUp.fdQryProduto, '');
+end;
+
+procedure TfrmCadastroVenda.GravaItem;
+begin
+  fdQryItens.Append;
+  fdQryItensID_PRODUTO_PRO.AsInteger := DBLCBItem.KeyValue;
+  fdQryItensQTD_VIT.AsFloat := edtQtd.Value;
+  fdQryItensVALOR_UNITARIO_VIT.AsFloat := edtVlrUnt.Value;
+  fdQryItensDESCONTO_VIT.AsFloat := edtDesconto.Value;
+  fdQryItens.Post;
+end;
+
+procedure TfrmCadastroVenda.LimpaCampos;
+begin
+  DBLCBItem.KeyValue := 0;
+  edtQtd.Value := 0;
+  edtVlrUnt.Value := 0;
+  edtDesconto.Value := 0;
+  edtSubTotal.Value := 0;
+  edtTotal.Value := 0;
+  DBLCBItem.SetFocus;
+end;
+
+procedure TfrmCadastroVenda.SetDadosProduto(pIdProduto: Integer);
+begin
+  edtQtd.Value := 1;
+  edtVlrUnt.Value := dmLookUp.fdQryProdutoV_UNITARIO_PRO.AsFloat;
+end;
+
+procedure TfrmCadastroVenda.SetItens(pIdVenda: Integer);
+begin
+  fdQryItens.Close;
+  fdQryItens.ParamByName('ID_VENDA_VEN').AsInteger := pIdVenda;
+  AtualizaFDQuery(fdQryItens, '');
+  Totaliza;
+end;
+
+procedure TfrmCadastroVenda.TotalItem;
+begin
+  edtSubTotal.Value := edtQtd.Value * edtVlrUnt.Value;
+  edtTotal.Value := (edtQtd.Value * edtVlrUnt.Value) - edtDesconto.Value;
+end;
+
+procedure TfrmCadastroVenda.Totaliza;
+var
+  vQryTotais: TFDQuery;
+  vSql: String;
+begin
+  vQryTotais := TFDQuery.Create(nil);
+  vQryTotais.Transaction := fdtransItem;
+  vQryTotais.Connection := dmConexao.fdConexao;
+  try
+    vSql := 'SELECT SUM(QTD_VIT * VALOR_UNITARIO_VIT) SUBTOTAL, ' +
+            'SUM(COALESCE(DESCONTO_VIT, 0)) DESCONTO, ' +
+            'SUM((QTD_VIT * VALOR_UNITARIO_VIT) - COALESCE(DESCONTO_VIT, 0)) TOTAL ' +
+            'FROM VENDA_ITEM ' +
+            'WHERE ID_VENDA_VEN = ' + IntToStr(fdQryCadastroID_VENDA_VEN.AsInteger);
+    AtualizaFDQuery(vQryTotais, vSql);
+    edtTotSubTotal.Value := vQryTotais.FieldByName('SUBTOTAL').AsFloat;
+    edtTotDesconto.Value := vQryTotais.FieldByName('DESCONTO').AsFloat;
+    edtTotTotal.Value := vQryTotais.FieldByName('TOTAL').AsFloat;
+  finally
+    vQryTotais.Close;
+    FreeAndNil(vQryTotais);
+  end;
+end;
+
+end.

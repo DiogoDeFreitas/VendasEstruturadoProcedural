@@ -1,0 +1,30 @@
+unit uClienteController;
+
+interface
+
+uses uClienteModel;
+
+type
+  TClienteController = Class
+    private
+
+    public
+      function GetNomeTabela: String;
+      function GetChavePrimaria: String;
+      procedure Gravar(Cliente: TCliente);
+  End;
+
+implementation
+
+function TClienteController.GetChavePrimaria: String;
+begin
+  Result := 'ID_CLIENTE_CLI';
+end;
+
+function TClienteController.GetNomeTabela: String;
+begin
+  Result := 'CLIENTE';
+end;
+
+
+end.

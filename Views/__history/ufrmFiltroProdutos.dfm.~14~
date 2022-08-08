@@ -1,0 +1,109 @@
+inherited frmFiltroProdutos: TfrmFiltroProdutos
+  Caption = 'Filtro de Produtos'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    inherited Label1: TLabel
+      Width = 33
+      Caption = 'C'#243'digo'
+      ExplicitWidth = 33
+    end
+    object Label2: TLabel [1]
+      Left = 88
+      Top = 7
+      Width = 46
+      Height = 13
+      Caption = 'Descri'#231#227'o'
+    end
+    inherited edtFiltro: TEdit
+      Width = 72
+      ExplicitWidth = 72
+    end
+    inherited btnFiltro: TButton
+      Left = 352
+      Caption = 'Filtrar'
+      OnClick = btnFiltroClick
+      ExplicitLeft = 352
+    end
+    inherited Panel2: TPanel
+      ExplicitLeft = 688
+    end
+    object edtDescricao: TEdit
+      Left = 88
+      Top = 26
+      Width = 248
+      Height = 21
+      TabOrder = 3
+    end
+  end
+  object DBGrid1: TDBGrid [1]
+    Left = 0
+    Top = 70
+    Width = 789
+    Height = 268
+    Align = alClient
+    DataSource = dsFiltro
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  inherited fdQryFiltro: TFDQuery
+    UpdateOptions.AssignedValues = [uvFetchGeneratorsPoint, uvGeneratorName]
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    SQL.Strings = (
+      'SELECT * FROM PRODUTO')
+    object fdQryFiltroID_PRODUTO_PRO: TIntegerField
+      FieldName = 'ID_PRODUTO_PRO'
+      Origin = 'ID_PRODUTO_PRO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdQryFiltroDESCRICAO_PRO: TWideStringField
+      FieldName = 'DESCRICAO_PRO'
+      Origin = 'DESCRICAO_PRO'
+      Size = 80
+    end
+    object fdQryFiltroQTDE_PRO: TSingleField
+      FieldName = 'QTDE_PRO'
+      Origin = 'QTDE_PRO'
+    end
+    object fdQryFiltroCUSTO_PRO: TSingleField
+      FieldName = 'CUSTO_PRO'
+      Origin = 'CUSTO_PRO'
+    end
+    object fdQryFiltroV_UNITARIO_PRO: TSingleField
+      FieldName = 'V_UNITARIO_PRO'
+      Origin = 'V_UNITARIO_PRO'
+    end
+    object fdQryFiltroUNIDADE_PRO: TWideStringField
+      FieldName = 'UNIDADE_PRO'
+      Origin = 'UNIDADE_PRO'
+      Size = 4
+    end
+    object fdQryFiltroPESO_LIQUIDO_PRO: TSingleField
+      FieldName = 'PESO_LIQUIDO_PRO'
+      Origin = 'PESO_LIQUIDO_PRO'
+    end
+    object fdQryFiltroPESO_BRUTO_PRO: TSingleField
+      FieldName = 'PESO_BRUTO_PRO'
+      Origin = 'PESO_BRUTO_PRO'
+    end
+    object fdQryFiltroFABRICANTE_PRO: TWideStringField
+      FieldName = 'FABRICANTE_PRO'
+      Origin = 'FABRICANTE_PRO'
+      Size = 60
+    end
+    object fdQryFiltroMARCA_MODELO_PRO: TWideStringField
+      FieldName = 'MARCA_MODELO_PRO'
+      Origin = 'MARCA_MODELO_PRO'
+      Size = 255
+    end
+    object fdQryFiltroID_FORNECEDOR_FOR: TIntegerField
+      FieldName = 'ID_FORNECEDOR_FOR'
+      Origin = 'ID_FORNECEDOR_FOR'
+    end
+  end
+end

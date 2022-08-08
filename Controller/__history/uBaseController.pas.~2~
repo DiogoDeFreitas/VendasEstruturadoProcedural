@@ -1,0 +1,15 @@
+unit uBaseController;
+
+interface
+
+type
+  TBaseController = Class
+    private
+
+    public
+
+  End;
+
+implementation
+
+end.

@@ -1,0 +1,146 @@
+unit ufrmFiltroVendas;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ufrmFiltroPai, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.Client, Data.DB, FireDAC.Comp.DataSet, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.ComCtrls, Vcl.Grids, Vcl.DBGrids, frxClass, frxDBSet;
+
+type
+  TfrmFiltroVendas = class(TfrmFiltroPai)
+    edtDataIni: TDateTimePicker;
+    edtDataFim: TDateTimePicker;
+    Label2: TLabel;
+    edtCodVenda: TEdit;
+    Label3: TLabel;
+    cbFaturado: TCheckBox;
+    DBGrid1: TDBGrid;
+    btnImprimir: TButton;
+    frVendas: TfrxReport;
+    frDBVendas: TfrxDBDataset;
+    fdQryRelatorio: TFDQuery;
+    fdQryRelatorioID_VENDA_VEN: TIntegerField;
+    fdQryRelatorioID_CLIENTE_CLI: TIntegerField;
+    fdQryRelatorioCLIENTE: TWideStringField;
+    fdQryRelatorioDATA_VEN: TDateField;
+    fdQryRelatorioFATURADO: TWideStringField;
+    fdQryRelatorioDESCRICAO_PRO: TWideStringField;
+    fdQryRelatorioQTD_VIT: TSingleField;
+    fdQryRelatorioSUBTOTAL: TFloatField;
+    fdQryRelatorioDESCONTO: TSingleField;
+    fdQryRelatorioTOTAL: TFloatField;
+    fdQryRelatorioVALOR_UNITARIO_VIT: TSingleField;
+    procedure btnFiltroClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
+  private
+    procedure Filtrar;
+    procedure SetFiltro(const pQuery: TFDQuery);
+    procedure Imprimir;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmFiltroVendas: TfrmFiltroVendas;
+
+implementation
+
+{$R *.dfm}
+
+uses udmConexao, uBiblioteca;
+
+{ TfrmFiltroVendas }
+
+procedure TfrmFiltroVendas.btnFiltroClick(Sender: TObject);
+begin
+  inherited;
+  Filtrar;
+end;
+
+procedure TfrmFiltroVendas.btnImprimirClick(Sender: TObject);
+begin
+  inherited;
+  Imprimir;
+  CarregaRelatorio(frVendas);
+end;
+
+procedure TfrmFiltroVendas.Filtrar;
+begin
+  fdQryFiltro.Close;
+  fdQryFiltro.SQL.Clear;
+  fdQryFiltro.SQL.Add('SELECT V.ID_VENDA_VEN, ');
+  fdQryFiltro.SQL.Add('V.ID_CLIENTE_CLI, ');
+  fdQryFiltro.SQL.Add('DECODE(C.TIPO_FJ_CLI, ''F'', C.NOME_CLI, C.RAZAO_SOCIAL_CLI) CLIENTE, ');
+  fdQryFiltro.SQL.Add('V.DATA_VEN, ');
+  fdQryFiltro.SQL.Add('COALESCE(V.FATURADO_VEN, ''N'') FATURADO ');
+  fdQryFiltro.SQL.Add('FROM VENDA V ');
+  fdQryFiltro.SQL.Add('INNER JOIN CLIENTE C ON C.ID_CLIENTE_CLI = V.ID_CLIENTE_CLI');
+  fdQryFiltro.SQL.Add(' AND DT_EXCLUIDO IS NULL');
+
+  SetFiltro(fdQryFiltro);
+
+  fdQryFiltro.Open;
+  fdQryFiltro.FetchAll;
+end;
+
+procedure TfrmFiltroVendas.FormShow(Sender: TObject);
+begin
+  inherited;
+  edtDataIni.Date := Date;
+  edtDataFim.Date := Date;
+end;
+
+procedure TfrmFiltroVendas.Imprimir;
+begin
+  fdQryRelatorio.Close;
+  fdQryRelatorio.SQL.Clear;
+  fdQryRelatorio.SQL.Add('SELECT V.ID_VENDA_VEN, ');
+  fdQryRelatorio.SQL.Add('     V.ID_CLIENTE_CLI,');
+  fdQryRelatorio.SQL.Add('     DECODE(C.TIPO_FJ_CLI, ''F'', C.NOME_CLI, C.RAZAO_SOCIAL_CLI) CLIENTE,');
+  fdQryRelatorio.SQL.Add('     V.DATA_VEN,');
+  fdQryRelatorio.SQL.Add('     COALESCE(V.FATURADO_VEN, ''N'') FATURADO,');
+  fdQryRelatorio.SQL.Add('     P.DESCRICAO_PRO,');
+  fdQryRelatorio.SQL.Add('     VI.QTD_VIT,');
+  fdQryRelatorio.SQL.Add('     VI.VALOR_UNITARIO_VIT,');
+  fdQryRelatorio.SQL.Add('     VI.VALOR_UNITARIO_VIT * VI.QTD_VIT SUBTOTAL,');
+  fdQryRelatorio.SQL.Add('     COALESCE(VI.DESCONTO_VIT, 0) DESCONTO,');
+  fdQryRelatorio.SQL.Add('     (VI.VALOR_UNITARIO_VIT * VI.QTD_VIT) - COALESCE(VI.DESCONTO_VIT, 0) TOTAL');
+  fdQryRelatorio.SQL.Add('     FROM VENDA V');
+  fdQryRelatorio.SQL.Add('     INNER JOIN CLIENTE C ON C.ID_CLIENTE_CLI = V.ID_CLIENTE_CLI');
+  fdQryRelatorio.SQL.Add('     INNER JOIN VENDA_ITEM VI ON VI.id_venda_ven = V.id_venda_ven');
+  fdQryRelatorio.SQL.Add('     INNER JOIN PRODUTO P ON P.id_produto_pro = VI.id_produto_pro');
+  fdQryRelatorio.SQL.Add('     WHERE 1 = 1');
+
+  SetFiltro(fdQryRelatorio);
+
+  fdQryRelatorio.SQL.Add('     ORDER BY DECODE(C.TIPO_FJ_CLI, ''F'', C.NOME_CLI, C.RAZAO_SOCIAL_CLI),');
+  fdQryRelatorio.SQL.Add('                     P.DESCRICAO_PRO');
+
+end;
+
+procedure TfrmFiltroVendas.SetFiltro(const pQuery: TFDQuery);
+begin
+  if Trim(edtFiltro.Text) <> '' then
+    pQuery.SQL.Add(' AND TRIM(UPPER(DECODE(C.TIPO_FJ_CLI, ''F'', C.NOME_CLI, C.RAZAO_SOCIAL_CLI))) LIKE ' +
+      QuotedStr('%' + UpperCase(Trim(edtFiltro.Text) + '%')));
+
+  if edtDataIni.Date > 0 then
+    pQuery.SQL.Add('AND V.DATA_VEN >= ' + QuotedStr(FormatDateTime('dd.mm.yyyy', edtDataIni.Date)));
+
+  if edtDataFim.Date > 0 then
+    pQuery.SQL.Add('AND V.DATA_VEN >= ' + QuotedStr(FormatDateTime('dd.mm.yyyy', edtDataFim.Date)));
+
+  if edtCodVenda.Text <> '' then
+    pQuery.SQL.Add('AND V.ID_VENDA_VEN = ' + edtCodVenda.Text);
+
+  if cbFaturado.Checked then
+    pQuery.SQL.Add('AND V.FATURADO_VEN = ''S'' ');
+
+end;
+
+end.

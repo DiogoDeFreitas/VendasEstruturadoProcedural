@@ -1,0 +1,28 @@
+unit uCliente;
+
+interface
+
+type
+  TCliente = class
+    private
+
+    public
+      function GetNomeTabela: String;
+      function GetChavePrimaria: String;
+  end;
+
+implementation
+
+{ TCliente }
+
+function TCliente.GetChavePrimaria: String;
+begin
+  Result := 'ID_CLIENTE_CLI';
+end;
+
+function TCliente.GetNomeTabela: String;
+begin
+  Result := 'CLIENTE';
+end;
+
+end.
